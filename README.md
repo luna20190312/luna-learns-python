@@ -83,6 +83,10 @@ http://192.168.1.100:3000/
 https://luna20190312.github.io/luna-learns-python/
 ```
 
+这是 GitHub Pages 的项目站点：`luna20190312.github.io` 是组织域名，
+`luna-learns-python` 是当前项目名。以后其他仓库可以继续发布为
+`luna20190312.github.io/新项目名/`，彼此独立。
+
 GitHub Pages 使用 `/luna-learns-python` 子路径构建，Skulpt Python
 运行时也会从该子路径加载，因此现有课程的代码运行、输入和 Turtle
 绘图功能可以继续使用。

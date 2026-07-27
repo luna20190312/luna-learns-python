@@ -140,16 +140,31 @@ for flower in range(18):
 
 function loadScript(src: string) {
   return new Promise<void>((resolve, reject) => {
-    const existing = document.querySelector(`script[src="${src}"]`);
-    if (existing) {
+    const existing = document.querySelector<HTMLScriptElement>(
+      `script[src="${src}"]`,
+    );
+    if (existing?.dataset.loaded === "true") {
       resolve();
       return;
     }
-    const script = document.createElement("script");
-    script.src = src;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error(`无法加载 ${src}`));
-    document.body.appendChild(script);
+    const script = existing ?? document.createElement("script");
+    script.addEventListener(
+      "load",
+      () => {
+        script.dataset.loaded = "true";
+        resolve();
+      },
+      { once: true },
+    );
+    script.addEventListener(
+      "error",
+      () => reject(new Error(`无法加载 ${src}`)),
+      { once: true },
+    );
+    if (!existing) {
+      script.src = src;
+      document.body.appendChild(script);
+    }
   });
 }
 
