@@ -9,6 +9,8 @@ declare global {
   }
 }
 
+const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 function appendScript(src: string) {
   return new Promise<void>((resolve, reject) => {
     const existing = document.querySelector<HTMLScriptElement>(
@@ -40,8 +42,10 @@ function appendScript(src: string) {
 function ensurePythonRuntime() {
   if (window.Sk?.builtinFiles) return Promise.resolve();
   if (!window.__pythonRuntimePromise) {
-    window.__pythonRuntimePromise = appendScript("/runtime/skulpt.min.js").then(
-      () => appendScript("/runtime/skulpt-stdlib.js"),
+    window.__pythonRuntimePromise = appendScript(
+      `${publicBasePath}/runtime/skulpt.min.js`,
+    ).then(() =>
+      appendScript(`${publicBasePath}/runtime/skulpt-stdlib.js`),
     );
   }
   return window.__pythonRuntimePromise;

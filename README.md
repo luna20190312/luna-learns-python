@@ -72,6 +72,29 @@ npm run dev -- --hostname 0.0.0.0
 http://192.168.1.100:3000/
 ```
 
+## GitHub Pages
+
+项目支持通过 GitHub Actions 自动发布为静态网站。推送到 `main` 后，
+`.github/workflows/deploy-pages.yml` 会构建并发布站点。
+
+在线访问地址：
+
+```text
+https://luna20190312.github.io/luna-learns-python/
+```
+
+GitHub Pages 使用 `/luna-learns-python` 子路径构建，Skulpt Python
+运行时也会从该子路径加载，因此现有课程的代码运行、输入和 Turtle
+绘图功能可以继续使用。
+
+本地检查 GitHub Pages 构建：
+
+```bash
+GITHUB_PAGES=true \
+NEXT_PUBLIC_BASE_PATH=/luna-learns-python \
+npm run build:pages
+```
+
 ## 检查项目
 
 ```bash

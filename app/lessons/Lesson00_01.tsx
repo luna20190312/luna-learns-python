@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 declare global {
   interface Window {
     Sk: any;
@@ -307,8 +309,10 @@ export default function Lesson00_01() {
 
   useEffect(() => {
     let active = true;
-    loadScript("/runtime/skulpt.min.js")
-      .then(() => loadScript("/runtime/skulpt-stdlib.js"))
+    loadScript(`${publicBasePath}/runtime/skulpt.min.js`)
+      .then(() =>
+        loadScript(`${publicBasePath}/runtime/skulpt-stdlib.js`),
+      )
       .then(() => {
         if (active) setRuntimeReady(true);
       })
