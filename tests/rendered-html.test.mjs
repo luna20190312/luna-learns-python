@@ -32,10 +32,14 @@ test("server-renders the Luna Learns Python course home", async () => {
   assert.match(html, /<html lang="zh-CN">/);
   assert.match(html, /<title>Luna Learns Python｜贝琪的代码实验室<\/title>/);
   assert.match(html, /贝琪的代码实验室/);
+  assert.match(html, /为 Luna 设计的代码实验室/);
+  assert.match(html, /开始学习/);
+  assert.match(html, /Python 3\.7-ish/);
+  assert.match(html, /Joenix/);
+  assert.match(html, /持续更新/);
   assert.match(html, /先看看能做什么/);
   assert.match(html, /给计算机准确的指令/);
   assert.match(html, /让程序学会选择/);
-  assert.match(html, /魔法门闯关/);
   assert.match(html, /13<!-- --> \/<!-- --> <!-- -->13<!-- --> 可学习/);
 });
 
@@ -62,6 +66,8 @@ test("registers every lesson and bundles the browser Python runtime", async () =
   }
 
   assert.equal((courseShell.match(/status: "ready",/g) ?? []).length, 13);
+  assert.match(courseShell, /luna-learns-python:last-lesson/);
+  assert.match(courseShell, /window\.localStorage\.setItem/);
   assert.match(playground, /\/runtime\/skulpt\.min\.js/);
   assert.match(playground, /\/runtime\/skulpt-stdlib\.js/);
   assert.match(playground, /Sk\.importMainWithBody/);

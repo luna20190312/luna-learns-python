@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import CourseCover from "./CourseCover";
 import Lesson00_01 from "../lessons/Lesson00_01";
 import Lesson01_01 from "../lessons/Lesson01_01";
 import Lesson01_02 from "../lessons/Lesson01_02";
@@ -149,29 +150,42 @@ const allLessons = chapters.flatMap((chapter) =>
   chapter.lessons.map((lesson) => ({ chapter, lesson })),
 );
 
+const progressStorageKey = "luna-learns-python:last-lesson";
+
 export default function CourseShell() {
-  const [activeId, setActiveId] = useState("00-01");
+  const [activeId, setActiveId] = useState("cover");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [lastLessonId, setLastLessonId] = useState<string | null>(null);
 
   useEffect(() => {
     const readLessonFromUrl = () => {
       const requested = new URLSearchParams(window.location.search).get("lesson");
       if (requested && allLessons.some(({ lesson }) => lesson.id === requested)) {
         setActiveId(requested);
+        setLastLessonId(requested);
+        window.localStorage.setItem(progressStorageKey, requested);
+      } else {
+        setActiveId("cover");
       }
     };
 
+    const savedLesson = window.localStorage.getItem(progressStorageKey);
+    if (
+      savedLesson &&
+      allLessons.some(({ lesson }) => lesson.id === savedLesson)
+    ) {
+      setLastLessonId(savedLesson);
+    }
     readLessonFromUrl();
     window.addEventListener("popstate", readLessonFromUrl);
     return () => window.removeEventListener("popstate", readLessonFromUrl);
   }, []);
 
   const active = useMemo(
-    () =>
-      allLessons.find(({ lesson }) => lesson.id === activeId) ?? allLessons[0],
+    () => allLessons.find(({ lesson }) => lesson.id === activeId),
     [activeId],
   );
-  const ActiveLesson = active.lesson.component;
+  const ActiveLesson = active?.lesson.component;
   const activeIndex = allLessons.findIndex(
     ({ lesson }) => lesson.id === activeId,
   );
@@ -180,7 +194,13 @@ export default function CourseShell() {
     setActiveId(id);
     setSidebarOpen(false);
     const url = new URL(window.location.href);
-    url.searchParams.set("lesson", id);
+    if (id === "cover") {
+      url.searchParams.delete("lesson");
+    } else {
+      url.searchParams.set("lesson", id);
+      setLastLessonId(id);
+      window.localStorage.setItem(progressStorageKey, id);
+    }
     window.history.pushState({}, "", url);
     document.querySelector(".course-main")?.scrollTo({ top: 0 });
   }
@@ -230,6 +250,18 @@ export default function CourseShell() {
         </div>
 
         <nav className="course-tree">
+          <button
+            className={`cover-nav-link ${activeId === "cover" ? "active" : ""}`}
+            aria-current={activeId === "cover" ? "page" : undefined}
+            onClick={() => openLesson("cover")}
+            type="button"
+          >
+            <span aria-hidden="true">⌂</span>
+            <span>
+              <small>课程首页</small>
+              <strong>Luna Learns Python</strong>
+            </span>
+          </button>
           {chapters.map((chapter) => (
             <section className="chapter-group" key={chapter.number}>
               <header>
@@ -266,8 +298,8 @@ export default function CourseShell() {
         </nav>
 
         <footer className="sidebar-footer">
-          <span>当前课程</span>
-          <strong>{active.lesson.title}</strong>
+          <span>{active ? "当前课程" : "当前页面"}</span>
+          <strong>{active?.lesson.title ?? "课程封面"}</strong>
         </footer>
       </aside>
 
@@ -291,24 +323,42 @@ export default function CourseShell() {
             课程目录
           </button>
           <div className="toolbar-path">
-            <span>{active.chapter.number}</span>
-            <i aria-hidden="true">/</i>
-            <strong>{active.lesson.number}</strong>
-            <i aria-hidden="true">/</i>
-            <span>{active.lesson.title}</span>
+            {active ? (
+              <>
+                <span>{active.chapter.number}</span>
+                <i aria-hidden="true">/</i>
+                <strong>{active.lesson.number}</strong>
+                <i aria-hidden="true">/</i>
+                <span>{active.lesson.title}</span>
+              </>
+            ) : (
+              <>
+                <span>Luna Learns Python</span>
+                <i aria-hidden="true">/</i>
+                <strong>课程封面</strong>
+              </>
+            )}
           </div>
           <div className="toolbar-arrows">
             <button
-              disabled={activeIndex <= 0}
-              onClick={() => openLesson(allLessons[activeIndex - 1].lesson.id)}
+              disabled={!active || activeIndex <= 0}
+              onClick={() =>
+                active && openLesson(allLessons[activeIndex - 1].lesson.id)
+              }
               aria-label="上一课"
               type="button"
             >
               ←
             </button>
             <button
-              disabled={activeIndex >= allLessons.length - 1}
-              onClick={() => openLesson(allLessons[activeIndex + 1].lesson.id)}
+              disabled={active ? activeIndex >= allLessons.length - 1 : false}
+              onClick={() =>
+                openLesson(
+                  active
+                    ? allLessons[activeIndex + 1].lesson.id
+                    : allLessons[0].lesson.id,
+                )
+              }
               aria-label="下一课"
               type="button"
             >
@@ -317,8 +367,29 @@ export default function CourseShell() {
           </div>
         </header>
 
-        <div className="course-content" key={active.lesson.id}>
-          <ActiveLesson />
+        <div className="course-content" key={active?.lesson.id ?? "cover"}>
+          {ActiveLesson ? (
+            <ActiveLesson />
+          ) : (
+            <CourseCover
+              chapters={chapters.map(({ number, title, description }) => ({
+                number,
+                title,
+                description,
+              }))}
+              onStart={() => openLesson(allLessons[0].lesson.id)}
+              onContinue={
+                lastLessonId ? () => openLesson(lastLessonId) : undefined
+              }
+              continueTitle={
+                lastLessonId
+                  ? allLessons.find(({ lesson }) => lesson.id === lastLessonId)
+                      ?.lesson.title
+                  : undefined
+              }
+              onOpenCatalog={() => setSidebarOpen(true)}
+            />
+          )}
         </div>
       </main>
     </div>
