@@ -561,11 +561,6 @@ button {
   white-space: nowrap;
 }
 
-.cover-catalog {
-  padding: 0 18px;
-  background: white;
-}
-
 .cover-actions button:hover,
 .cover-finale button:hover {
   transform: translate(-1px, -1px);

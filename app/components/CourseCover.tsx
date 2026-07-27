@@ -11,7 +11,6 @@ type CourseCoverProps = {
   onStart: () => void;
   onContinue?: () => void;
   continueTitle?: string;
-  onOpenCatalog: () => void;
 };
 
 const facts = [
@@ -46,7 +45,6 @@ export default function CourseCover({
   onStart,
   onContinue,
   continueTitle,
-  onOpenCatalog,
 }: CourseCoverProps) {
   return (
     <article className="course-cover">
@@ -76,9 +74,6 @@ export default function CourseCover({
                 <small>{continueTitle}</small>
               </button>
             )}
-            <button className="cover-catalog" onClick={onOpenCatalog} type="button">
-              查看课程目录
-            </button>
           </div>
           <div className="cover-byline">
             <span>Designed &amp; written by</span>

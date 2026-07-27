@@ -40,7 +40,8 @@ test("server-renders the Luna Learns Python course home", async () => {
   assert.match(html, /先看看能做什么/);
   assert.match(html, /给计算机准确的指令/);
   assert.match(html, /让程序学会选择/);
-  assert.match(html, /13<!-- --> \/<!-- --> <!-- -->13<!-- --> 可学习/);
+  assert.doesNotMatch(html, /class="course-shell"/);
+  assert.doesNotMatch(html, /aria-label="课程目录"/);
 });
 
 test("registers every lesson and bundles the browser Python runtime", async () => {

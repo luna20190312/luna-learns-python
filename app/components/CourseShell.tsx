@@ -185,7 +185,6 @@ export default function CourseShell() {
     () => allLessons.find(({ lesson }) => lesson.id === activeId),
     [activeId],
   );
-  const ActiveLesson = active?.lesson.component;
   const activeIndex = allLessons.findIndex(
     ({ lesson }) => lesson.id === activeId,
   );
@@ -202,8 +201,33 @@ export default function CourseShell() {
       window.localStorage.setItem(progressStorageKey, id);
     }
     window.history.pushState({}, "", url);
+    window.scrollTo({ top: 0 });
     document.querySelector(".course-main")?.scrollTo({ top: 0 });
   }
+
+  if (!active) {
+    return (
+      <CourseCover
+        chapters={chapters.map(({ number, title, description }) => ({
+          number,
+          title,
+          description,
+        }))}
+        onStart={() => openLesson(allLessons[0].lesson.id)}
+        onContinue={
+          lastLessonId ? () => openLesson(lastLessonId) : undefined
+        }
+        continueTitle={
+          lastLessonId
+            ? allLessons.find(({ lesson }) => lesson.id === lastLessonId)?.lesson
+                .title
+            : undefined
+        }
+      />
+    );
+  }
+
+  const ActiveLesson = active.lesson.component;
 
   return (
     <div className="course-shell">
@@ -298,8 +322,8 @@ export default function CourseShell() {
         </nav>
 
         <footer className="sidebar-footer">
-          <span>{active ? "当前课程" : "当前页面"}</span>
-          <strong>{active?.lesson.title ?? "课程封面"}</strong>
+          <span>当前课程</span>
+          <strong>{active.lesson.title}</strong>
         </footer>
       </aside>
 
@@ -323,42 +347,24 @@ export default function CourseShell() {
             课程目录
           </button>
           <div className="toolbar-path">
-            {active ? (
-              <>
-                <span>{active.chapter.number}</span>
-                <i aria-hidden="true">/</i>
-                <strong>{active.lesson.number}</strong>
-                <i aria-hidden="true">/</i>
-                <span>{active.lesson.title}</span>
-              </>
-            ) : (
-              <>
-                <span>Luna Learns Python</span>
-                <i aria-hidden="true">/</i>
-                <strong>课程封面</strong>
-              </>
-            )}
+            <span>{active.chapter.number}</span>
+            <i aria-hidden="true">/</i>
+            <strong>{active.lesson.number}</strong>
+            <i aria-hidden="true">/</i>
+            <span>{active.lesson.title}</span>
           </div>
           <div className="toolbar-arrows">
             <button
-              disabled={!active || activeIndex <= 0}
-              onClick={() =>
-                active && openLesson(allLessons[activeIndex - 1].lesson.id)
-              }
+              disabled={activeIndex <= 0}
+              onClick={() => openLesson(allLessons[activeIndex - 1].lesson.id)}
               aria-label="上一课"
               type="button"
             >
               ←
             </button>
             <button
-              disabled={active ? activeIndex >= allLessons.length - 1 : false}
-              onClick={() =>
-                openLesson(
-                  active
-                    ? allLessons[activeIndex + 1].lesson.id
-                    : allLessons[0].lesson.id,
-                )
-              }
+              disabled={activeIndex >= allLessons.length - 1}
+              onClick={() => openLesson(allLessons[activeIndex + 1].lesson.id)}
               aria-label="下一课"
               type="button"
             >
@@ -367,29 +373,8 @@ export default function CourseShell() {
           </div>
         </header>
 
-        <div className="course-content" key={active?.lesson.id ?? "cover"}>
-          {ActiveLesson ? (
-            <ActiveLesson />
-          ) : (
-            <CourseCover
-              chapters={chapters.map(({ number, title, description }) => ({
-                number,
-                title,
-                description,
-              }))}
-              onStart={() => openLesson(allLessons[0].lesson.id)}
-              onContinue={
-                lastLessonId ? () => openLesson(lastLessonId) : undefined
-              }
-              continueTitle={
-                lastLessonId
-                  ? allLessons.find(({ lesson }) => lesson.id === lastLessonId)
-                      ?.lesson.title
-                  : undefined
-              }
-              onOpenCatalog={() => setSidebarOpen(true)}
-            />
-          )}
+        <div className="course-content" key={active.lesson.id}>
+          <ActiveLesson />
         </div>
       </main>
     </div>
