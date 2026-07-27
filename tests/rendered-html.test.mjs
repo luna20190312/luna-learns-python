@@ -69,6 +69,8 @@ test("registers every lesson and bundles the browser Python runtime", async () =
   assert.equal((courseShell.match(/status: "ready",/g) ?? []).length, 13);
   assert.match(courseShell, /luna-learns-python:last-lesson/);
   assert.match(courseShell, /window\.localStorage\.setItem/);
+  assert.match(courseShell, /aria-label="返回课程封面"/);
+  assert.doesNotMatch(courseShell, /cover-nav-link/);
   assert.match(playground, /\/runtime\/skulpt\.min\.js/);
   assert.match(playground, /\/runtime\/skulpt-stdlib\.js/);
   assert.match(playground, /Sk\.importMainWithBody/);

@@ -236,11 +236,23 @@ export default function CourseShell() {
         aria-label="课程目录"
       >
         <div className="sidebar-brand">
-          <span aria-hidden="true">{"{ }"}</span>
-          <div>
-            <strong>贝琪的代码实验室</strong>
-            <small>Python 学习课件</small>
-          </div>
+          <button
+            className="sidebar-home-button"
+            onClick={() => openLesson("cover")}
+            aria-label="返回课程封面"
+            type="button"
+          >
+            <span className="sprout-logo" aria-hidden="true">
+              <i className="sprout-stem" />
+              <i className="sprout-leaf sprout-leaf-left" />
+              <i className="sprout-leaf sprout-leaf-right" />
+              <i className="sprout-soil" />
+            </span>
+            <span className="sidebar-brand-copy">
+              <strong>贝琪的代码实验室</strong>
+              <small>Python 学习课件</small>
+            </span>
+          </button>
           <button
             className="sidebar-close"
             onClick={() => setSidebarOpen(false)}
@@ -274,18 +286,6 @@ export default function CourseShell() {
         </div>
 
         <nav className="course-tree">
-          <button
-            className={`cover-nav-link ${activeId === "cover" ? "active" : ""}`}
-            aria-current={activeId === "cover" ? "page" : undefined}
-            onClick={() => openLesson("cover")}
-            type="button"
-          >
-            <span aria-hidden="true">⌂</span>
-            <span>
-              <small>课程首页</small>
-              <strong>Luna Learns Python</strong>
-            </span>
-          </button>
           {chapters.map((chapter) => (
             <section className="chapter-group" key={chapter.number}>
               <header>
