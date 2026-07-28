@@ -66,7 +66,7 @@ button {
   display: flex;
   align-items: center;
   border-bottom: 2px solid var(--ink);
-  background: var(--lime);
+  background: var(--theme-brand);
 }
 
 .sidebar-home-button {
@@ -208,7 +208,7 @@ button {
   display: block;
   height: 100%;
   border-right: 1px solid var(--ink);
-  background: var(--coral);
+  background: var(--accent-deep);
 }
 
 .course-tree {
@@ -231,7 +231,7 @@ button {
 .chapter-group > header span {
   display: inline-block;
   margin-bottom: 6px;
-  color: #b13f27;
+  color: var(--accent-deep);
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.12em;
@@ -276,7 +276,7 @@ button {
 
 .lesson-links button.active {
   border-color: var(--ink);
-  background: var(--yellow);
+  background: var(--theme-highlight);
   box-shadow: 3px 3px 0 var(--ink);
 }
 
@@ -539,7 +539,7 @@ button {
 }
 
 .sidebar-footer span {
-  color: #a8bdcc;
+  color: var(--text-on-dark-muted);
   font-size: 9px;
   letter-spacing: 0.1em;
 }
@@ -1378,7 +1378,7 @@ button {
   place-items: center;
   border: 3px solid var(--ink);
   border-radius: 22px;
-  background: var(--yellow);
+  background: var(--theme-highlight);
   box-shadow: 6px 6px 0 var(--ink);
   font-family: ui-monospace, monospace;
   font-size: 34px;
@@ -1410,7 +1410,7 @@ button {
   gap: 18px;
   border: 2px solid var(--ink);
   border-radius: 14px;
-  background: var(--lime);
+  background: var(--theme-goal);
   box-shadow: 4px 4px 0 var(--ink);
 }
 
@@ -1455,7 +1455,7 @@ button {
   padding: 7px 10px;
   border: 1.5px solid var(--ink);
   border-radius: 7px;
-  background: var(--yellow);
+  background: var(--theme-highlight);
   font-size: 11px;
   font-weight: 900;
 }
@@ -2414,7 +2414,7 @@ button {
   grid-template-columns: 170px minmax(0, 1fr);
   align-items: center;
   gap: 34px;
-  background: #edf9ff;
+  background: var(--theme-activity);
 }
 
 .chat-robot {
@@ -3222,7 +3222,7 @@ button {
 .kicker,
 .eyebrow {
   margin: 0 0 15px;
-  color: var(--coral);
+  color: var(--accent-deep);
   font-size: 13px;
   font-weight: 900;
   letter-spacing: 0.12em;

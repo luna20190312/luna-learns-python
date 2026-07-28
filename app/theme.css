@@ -13,6 +13,12 @@
   --pink: #ffb3d1;
   --yellow: #ffe58f;
 
+  /* 主题身份色：结构用途固定，颜色随主题改变 */
+  --theme-brand: #ffd1df;
+  --theme-highlight: #ffe58f;
+  --theme-goal: #c9f5a5;
+  --theme-activity: #eefaff;
+
   /* 通用界面表面 */
   --surface-sidebar: #f6f2ff;
   --surface-cream: #fff7d9;
@@ -77,18 +83,22 @@
 }
 
 :root[data-theme="mint"] {
-  --ink: #153b43;
-  --muted: #527078;
+  --ink: #14373d;
+  --muted: #49666b;
   --paper: #fbfffd;
-  --line: #cce9df;
-  --navy: #20555e;
-  --coral: #ff9f91;
-  --lime: #baf2d3;
-  --blue: #8edce5;
-  --violet: #b7b4f3;
-  --pink: #f7b9cf;
-  --yellow: #ffe09d;
-  --surface-sidebar: #edfbf6;
+  --line: #c6e5da;
+  --navy: #1f5158;
+  --coral: #ff9b8f;
+  --lime: #b9efd0;
+  --blue: #91dbe4;
+  --violet: #aaa7ed;
+  --pink: #f5b6cc;
+  --yellow: #ffe29a;
+  --theme-brand: #b9efd0;
+  --theme-highlight: #ffe29a;
+  --theme-goal: #c7f2d9;
+  --theme-activity: #ecfbf8;
+  --surface-sidebar: #ecf9f4;
   --surface-cream: #fff7de;
   --surface-sky: #ebfcff;
   --surface-soft: #f7fffb;
@@ -109,7 +119,7 @@
   --green-strong: #68ca9a;
   --green-dark: #286b51;
   --shadow-deep: #102f35;
-  --accent-deep: #28725f;
+  --accent-deep: #23705d;
   --overlay-navy-45: rgba(32, 85, 94, 0.45);
   --glow-yellow: rgba(245, 215, 161, 0.32);
   --glow-pink: rgba(242, 200, 213, 0.58);
@@ -118,22 +128,26 @@
 }
 
 :root[data-theme="classic"] {
-  --ink: #1d3153;
-  --muted: #556b8d;
+  --ink: #1e2d55;
+  --muted: #526487;
   --paper: #fbfcff;
-  --line: #d3def5;
-  --navy: #294a78;
-  --coral: #ff918d;
-  --lime: #c3ef9d;
-  --blue: #86d5fa;
-  --violet: #9d8af2;
-  --pink: #f7acd2;
-  --yellow: #ffe184;
-  --surface-sidebar: #edf3ff;
+  --line: #d2daf4;
+  --navy: #2d4274;
+  --coral: #f28db6;
+  --lime: #c8c5ff;
+  --blue: #8dcdf6;
+  --violet: #a99af5;
+  --pink: #f5b0d1;
+  --yellow: #ffde82;
+  --theme-brand: #c7c9ff;
+  --theme-highlight: #ffde82;
+  --theme-goal: #d8d9ff;
+  --theme-activity: #eef3ff;
+  --surface-sidebar: #eef1ff;
   --surface-cream: #fff7d8;
   --surface-sky: #eaf8ff;
   --surface-soft: #f7f9ff;
-  --surface-success: #e5f8d9;
+  --surface-success: #e7f7e5;
   --surface-warning: #fff1bd;
   --surface-danger: #ffe2df;
   --surface-violet: #ede9ff;
@@ -146,9 +160,9 @@
   --border-control: #bdcbea;
   --border-route: #c7d3ed;
   --border-route-card: #d4def2;
-  --green: #9cdda9;
-  --green-strong: #82d093;
-  --green-dark: #356e45;
+  --green: #9edaae;
+  --green-strong: #7bc995;
+  --green-dark: #2f6944;
   --shadow-deep: #132746;
   --accent-deep: #544aa0;
   --overlay-navy-45: rgba(41, 74, 120, 0.45);
