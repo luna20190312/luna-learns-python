@@ -97,12 +97,20 @@ export default function CourseLessonFooter({
       </section>
 
       <nav className="lesson-bottom-nav" aria-label="课程前后导航">
+        <div className="lesson-nav-heading">
+          <span>课程路线</span>
+          <small>选一个方向，继续出发</small>
+        </div>
         <button
+          className="lesson-nav-previous"
           type="button"
           disabled={!previous}
           onClick={() => previous && onOpenLesson(previous.id)}
         >
-          <span>← 上一课</span>
+          <span className="lesson-nav-direction">
+            <i aria-hidden="true">←</i>
+            <em>上一课</em>
+          </span>
           <strong>
             {previous
               ? `${previous.chapter} · ${previous.number} · ${previous.title}`
@@ -110,11 +118,15 @@ export default function CourseLessonFooter({
           </strong>
         </button>
         <button
+          className="lesson-nav-next"
           type="button"
           disabled={!next}
           onClick={() => next && onOpenLesson(next.id)}
         >
-          <span>下一课 →</span>
+          <span className="lesson-nav-direction">
+            <em>下一课</em>
+            <i aria-hidden="true">→</i>
+          </span>
           <strong>
             {next
               ? `${next.chapter} · ${next.number} · ${next.title}`
