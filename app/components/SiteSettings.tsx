@@ -70,7 +70,7 @@ export default function SiteSettings({
         aria-label={isEnglish ? "Open settings" : "打开设置"}
         title={isEnglish ? "Settings" : "设置"}
       >
-        <span aria-hidden="true">⚙︎</span>
+        <span className="settings-gear" aria-hidden="true">⚙︎</span>
       </button>
 
       {open &&

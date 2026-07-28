@@ -375,19 +375,18 @@ button {
   box-shadow: none;
 }
 
-.site-settings-trigger > span {
+.site-settings-trigger > .settings-gear {
   width: 40px;
   height: 40px;
   display: grid;
   place-items: center;
   font-family: "Apple Symbols", "Segoe UI Symbol", sans-serif;
-  font-size: 40px;
+  font-size: 40px !important;
   line-height: 1;
-  transform-box: border-box;
-  transform-origin: center;
-  transition: transform 420ms ease-in-out;
+  rotate: 0deg;
+  transition: rotate 420ms ease-in-out;
 }
-.site-settings-trigger:hover > span { transform: rotate(90deg); }
+.site-settings-trigger:hover > .settings-gear { rotate: 90deg; }
 .site-settings-trigger.on-cover { bottom: 22px; left: 22px; }
 .site-settings-trigger.is-inline {
   position: static;
