@@ -367,12 +367,16 @@ button {
   cursor: pointer;
   color: var(--ink);
   transform: none !important;
-  transition: color 180ms ease;
+  transition: none !important;
 }
 
-.site-settings-trigger:hover {
+.site-settings-trigger:hover,
+.site-settings-trigger:focus,
+.site-settings-trigger:active {
+  border: 0 !important;
+  background: transparent !important;
   transform: none !important;
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 .site-settings-trigger > .settings-gear {
