@@ -201,7 +201,7 @@ button {
   overflow: hidden;
   border: 1px solid var(--ink);
   border-radius: 99px;
-  background: #e5ebe8;
+  background: var(--line);
 }
 
 .progress-track i {
@@ -316,7 +316,7 @@ button {
 .lesson-state {
   width: 8px;
   height: 8px;
-  border: 1px solid #87938d;
+  border: 1px solid var(--muted);
   border-radius: 50%;
   background: var(--white);
 }
@@ -366,18 +366,22 @@ button {
   box-shadow: none;
   cursor: pointer;
   color: var(--ink);
-  transform-origin: center;
-  transition:
-    color 180ms ease,
-    transform 420ms ease-in-out;
+  transform: none !important;
+  transition: color 180ms ease;
 }
 
 .site-settings-trigger:hover {
-  transform: rotate(90deg);
+  transform: none !important;
   box-shadow: none;
 }
 
-.site-settings-trigger > span { font-size: 40px; line-height: 1; }
+.site-settings-trigger > span {
+  font-size: 40px;
+  line-height: 1;
+  transform-origin: center;
+  transition: transform 420ms ease-in-out;
+}
+.site-settings-trigger:hover > span { transform: rotate(90deg); }
 .site-settings-trigger.on-cover { bottom: 22px; left: 22px; }
 .site-settings-trigger.is-inline {
   position: static;
@@ -1036,7 +1040,7 @@ button {
   grid-template-columns: 42px minmax(130px, 0.55fr) minmax(0, 1fr);
   align-items: start;
   gap: 20px;
-  border-bottom: 1px solid #bcc8c8;
+  border-bottom: 1px solid var(--border-control);
 }
 
 .cover-step-list span {
@@ -1059,7 +1063,7 @@ button {
 }
 
 .cover-map {
-  border-top: 1px solid #cbd2cf;
+  border-top: 1px solid var(--border-soft);
 }
 
 .cover-chapters {
@@ -1426,7 +1430,7 @@ button {
   border: 2px solid var(--ink);
   border-radius: 22px;
   background: var(--white);
-  box-shadow: 6px 6px 0 #cbd7d4;
+  box-shadow: 6px 6px 0 var(--border-soft);
 }
 
 .activity-heading {
@@ -1653,7 +1657,7 @@ button {
   justify-content: space-between;
   gap: 20px;
   border-bottom: 2px solid var(--ink);
-  background: #f6f8f7;
+  background: var(--surface-soft);
 }
 
 .mini-playground > header .eyebrow {
@@ -1748,8 +1752,8 @@ button {
   min-width: 0;
   background-color: #fbfcf8;
   background-image:
-    linear-gradient(#e6ece8 1px, transparent 1px),
-    linear-gradient(90deg, #e6ece8 1px, transparent 1px);
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 22px 22px;
 }
 
@@ -2468,7 +2472,7 @@ button {
   padding: 11px 14px;
   border: 1.5px solid var(--ink);
   border-radius: 13px 13px 13px 3px;
-  background: #f3f7f5;
+  background: var(--surface-soft);
   font-size: 13px;
   line-height: 1.55;
 }
@@ -2851,9 +2855,9 @@ button {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border: 2px solid #a8b1ae;
+  border: 2px solid var(--border-control);
   border-radius: 16px;
-  background: #f2f5f3;
+  background: var(--surface-soft);
   opacity: 0.45;
 }
 
@@ -2940,13 +2944,13 @@ button {
   grid-template-columns: 23px 1fr;
   align-items: center;
   gap: 8px;
-  border: 1.5px solid #bbc4c0;
+  border: 1.5px solid var(--border-control);
   border-radius: 8px;
-  color: #89958f;
+  color: var(--muted);
 }
 
 .weather-checks > div.passed {
-  background: #f1f3f2;
+  background: var(--surface-soft);
   text-decoration: line-through;
 }
 
@@ -3110,10 +3114,10 @@ button {
   display: flex;
   align-items: center;
   gap: 9px;
-  border: 2px solid #adb8b3;
+  border: 2px solid var(--border-control);
   border-radius: 10px;
   background: var(--white);
-  color: #7e8b85;
+  color: var(--muted);
 }
 
 .decision-trace > div.matched {
@@ -3560,10 +3564,10 @@ button {
 
 .result-panel {
   overflow: hidden;
-  background-color: #f7f9f8;
+  background-color: var(--surface-soft);
   background-image:
-    linear-gradient(#e5e9e7 1px, transparent 1px),
-    linear-gradient(90deg, #e5e9e7 1px, transparent 1px);
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 22px 22px;
 }
 
@@ -3571,7 +3575,7 @@ button {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #bdc6c8;
+  background: var(--border-control);
 }
 
 .result-panel.is-awake .status-dot {
@@ -3831,10 +3835,10 @@ button {
 .repeat-speech p {
   margin: 0;
   padding: 15px 18px;
-  border: 2px dashed #abb6b1;
+  border: 2px dashed var(--border-control);
   border-radius: 12px;
   background: var(--overlay-white-70);
-  color: #98a39e;
+  color: var(--border-control);
   font-size: 13px;
   text-align: center;
 }
@@ -4044,7 +4048,7 @@ button {
   border-style: dashed;
   background: transparent;
   box-shadow: none;
-  color: #95a19c;
+  color: var(--border-control);
   text-decoration: line-through;
 }
 
@@ -4170,7 +4174,7 @@ button {
   align-items: center;
   gap: 13px;
   border-radius: 9px;
-  background: #f2f6f4;
+  background: var(--surface-soft);
 }
 
 .range-parts strong {
@@ -4332,9 +4336,9 @@ button {
   display: grid;
   align-content: start;
   gap: 7px;
-  border: 1.5px dashed #9eaaa4;
+  border: 1.5px dashed var(--border-control);
   border-radius: 10px;
-  background: #f5f7f5;
+  background: var(--surface-soft);
 }
 
 .guess-history p {
@@ -4499,7 +4503,7 @@ button {
   place-items: center;
   border: 4px solid var(--ink);
   border-radius: 28px;
-  background: #cbd4d1;
+  background: var(--border-soft);
   box-shadow: 7px 7px 0 var(--ink);
   transition: 220ms ease;
 }
@@ -4967,9 +4971,9 @@ button {
   height: 105px;
   margin: 8px 0 12px;
   place-items: center;
-  border: 3px dashed #9aa6a0;
+  border: 3px dashed var(--border-control);
   border-radius: 50%;
-  color: #9aa6a0;
+  color: var(--border-control);
   font-size: 38px;
 }
 
@@ -5945,10 +5949,10 @@ button {
 
 .traverse-items > div {
   overflow: hidden;
-  border: 2px solid #aeb8b3;
+  border: 2px solid var(--border-control);
   border-radius: 8px;
   background: var(--white);
-  color: #87938d;
+  color: var(--muted);
   text-align: center;
 }
 
@@ -6016,7 +6020,7 @@ button {
 .traverse-route span {
   padding: 7px 9px;
   border-radius: 7px;
-  background: #f0f3f1;
+  background: var(--surface-soft);
   color: var(--muted);
   font-size: 9px;
 }
@@ -6716,7 +6720,7 @@ button {
   grid-template-columns: 28px 1fr;
   align-items: center;
   gap: 9px;
-  border: 1.5px solid #b1bbb6;
+  border: 1.5px solid var(--border-control);
   border-radius: 8px;
 }
 
@@ -6874,7 +6878,7 @@ button {
   min-height: 410px;
   border-right: 2px solid var(--ink);
   background-color: var(--surface-sky);
-  background-image: linear-gradient(#d7e4df 1px, transparent 1px), linear-gradient(90deg, #d7e4df 1px, transparent 1px);
+  background-image: linear-gradient(var(--border-soft) 1px, transparent 1px), linear-gradient(90deg, var(--border-soft) 1px, transparent 1px);
   background-size: 25px 25px;
 }
 
@@ -7315,7 +7319,7 @@ button {
 .pet-dashboard { padding: 30px; display: grid; align-content: center; gap: 13px; }
 .pet-dashboard > div { display: grid; grid-template-columns: 45px 1fr 30px; align-items: center; gap: 8px; }
 .pet-dashboard > div span { font-size: 9px; }
-.pet-dashboard > div i { height: 11px; overflow: hidden; border: 1.5px solid var(--ink); border-radius: 99px; background: #e3e8e5; }
+.pet-dashboard > div i { height: 11px; overflow: hidden; border: 1.5px solid var(--ink); border-radius: 99px; background: var(--line); }
 .pet-dashboard > div b { display: block; height: 100%; background: var(--coral); transition: width 180ms; }
 .pet-dashboard > section { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
 
