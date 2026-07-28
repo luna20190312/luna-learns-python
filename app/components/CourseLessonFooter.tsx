@@ -25,6 +25,7 @@ type CourseLessonFooterProps = {
   onOpenLesson: (id: string) => void;
   parentTip: string;
   quiz?: Quiz;
+  language?: "zh" | "en";
 };
 
 export default function CourseLessonFooter({
@@ -36,18 +37,20 @@ export default function CourseLessonFooter({
   onOpenLesson,
   parentTip,
   quiz,
+  language = "zh",
 }: CourseLessonFooterProps) {
   const [quizChoice, setQuizChoice] = useState<number | null>(null);
   const quizCorrect = quizChoice === quiz?.answer;
+  const en = language === "en";
 
   return (
     <div className="course-lesson-footer">
       {quiz && (
         <section className="chapter-quiz">
           <div className="chapter-quiz-heading">
-            <span>章节小测验</span>
+            <span>{en ? "CHAPTER QUIZ" : "章节小测验"}</span>
             <div>
-              <h2>最后确认一下</h2>
+              <h2>{en ? "One last check" : "最后确认一下"}</h2>
               <p>{quiz.question}</p>
             </div>
           </div>
@@ -66,7 +69,15 @@ export default function CourseLessonFooter({
           </div>
           {quizChoice !== null && (
             <p className={`chapter-quiz-result ${quizCorrect ? "correct" : ""}`}>
-              <strong>{quizCorrect ? "答对了！" : "再想一想"}</strong>
+              <strong>
+                {quizCorrect
+                  ? en
+                    ? "Correct!"
+                    : "答对了！"
+                  : en
+                    ? "Try again"
+                    : "再想一想"}
+              </strong>
               {quiz.explanation}
             </p>
           )}
@@ -76,15 +87,23 @@ export default function CourseLessonFooter({
       <section className="parent-learning-tip">
         <span aria-hidden="true">👨‍👩‍👧</span>
         <div>
-          <small>给陪学家长</small>
+          <small>{en ? "FOR GROWN-UPS" : "给陪学家长"}</small>
           <strong>{parentTip}</strong>
         </div>
       </section>
 
       <section className="lesson-completion">
         <div>
-          <small>本课学习状态</small>
-          <strong>{completed ? "已经完成，可以继续前进" : "完成互动和代码实验后再打勾"}</strong>
+          <small>{en ? "LESSON STATUS" : "本课学习状态"}</small>
+          <strong>
+            {completed
+              ? en
+                ? "Completed — ready to move on"
+                : "已经完成，可以继续前进"
+              : en
+                ? "Finish the activities before checking this lesson"
+                : "完成互动和代码实验后再打勾"}
+          </strong>
         </div>
         <button
           className={completed ? "completed" : ""}
@@ -92,15 +111,17 @@ export default function CourseLessonFooter({
           onClick={onToggleComplete}
           aria-pressed={completed}
         >
-          {completed ? "✓ 已学会" : "标记为已学会"}
+          {completed
+            ? en
+              ? "✓ Learned"
+              : "✓ 已学会"
+            : en
+              ? "Mark as learned"
+              : "标记为已学会"}
         </button>
       </section>
 
       <nav className="lesson-bottom-nav" aria-label="课程前后导航">
-        <div className="lesson-nav-heading">
-          <span>课程路线</span>
-          <small>选一个方向，继续出发</small>
-        </div>
         <button
           className="lesson-nav-previous"
           type="button"
@@ -108,13 +129,14 @@ export default function CourseLessonFooter({
           onClick={() => previous && onOpenLesson(previous.id)}
         >
           <span className="lesson-nav-direction">
-            <i aria-hidden="true">←</i>
-            <em>上一课</em>
+            <i aria-hidden="true">←</i> {en ? "Previous" : "上一课"}
           </span>
           <strong>
             {previous
               ? `${previous.chapter} · ${previous.number} · ${previous.title}`
-              : "已经是第一课"}
+              : en
+                ? "This is the first lesson"
+                : "已经是第一课"}
           </strong>
         </button>
         <button
@@ -124,17 +146,20 @@ export default function CourseLessonFooter({
           onClick={() => next && onOpenLesson(next.id)}
         >
           <span className="lesson-nav-direction">
-            <em>下一课</em>
-            <i aria-hidden="true">→</i>
+            {en ? "Next" : "下一课"} <i aria-hidden="true">→</i>
           </span>
           <strong>
             {next
               ? `${next.chapter} · ${next.number} · ${next.title}`
-              : "已经完成全部课程"}
+              : en
+                ? "All lessons completed"
+                : "已经完成全部课程"}
           </strong>
         </button>
       </nav>
-      <span className="lesson-footer-id">课程编号 {lessonId}</span>
+      <span className="lesson-footer-id">
+        {en ? "Lesson ID" : "课程编号"} {lessonId}
+      </span>
     </div>
   );
 }

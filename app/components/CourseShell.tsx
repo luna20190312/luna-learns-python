@@ -4,6 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import CourseCover from "./CourseCover";
 import CourseLessonFooter from "./CourseLessonFooter";
 import { LessonSessionProvider } from "./LessonSessionContext";
+import SiteSettings, {
+  type SiteLanguage,
+  type SiteTheme,
+} from "./SiteSettings";
 import Lesson00_01 from "../lessons/Lesson00_01";
 import Lesson01_01 from "../lessons/Lesson01_01";
 import Lesson01_02 from "../lessons/Lesson01_02";
@@ -473,6 +477,7 @@ const allLessons = chapters.flatMap((chapter) =>
 
 const progressStorageKey = "luna-learns-python:last-lesson";
 const completionStorageKey = "luna-learns-python:completed-lessons";
+const settingsStorageKey = "luna-learns-python:settings";
 
 const chapterLearningExtras: Record<
   string,
@@ -601,6 +606,9 @@ export default function CourseShell() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [lastLessonId, setLastLessonId] = useState<string | null>(null);
   const [completedIds, setCompletedIds] = useState<string[]>([]);
+  const [language, setLanguage] = useState<SiteLanguage>("zh");
+  const [theme, setTheme] = useState<SiteTheme>("macaron");
+  const [settingsReady, setSettingsReady] = useState(false);
 
   useEffect(() => {
     const readLessonFromUrl = () => {
@@ -635,10 +643,38 @@ export default function CourseShell() {
     } catch {
       window.localStorage.removeItem(completionStorageKey);
     }
+    try {
+      const savedSettings = JSON.parse(
+        window.localStorage.getItem(settingsStorageKey) ?? "{}",
+      );
+      if (savedSettings.language === "zh" || savedSettings.language === "en") {
+        setLanguage(savedSettings.language);
+      }
+      if (
+        savedSettings.theme === "macaron" ||
+        savedSettings.theme === "mint" ||
+        savedSettings.theme === "classic"
+      ) {
+        setTheme(savedSettings.theme);
+      }
+    } catch {
+      window.localStorage.removeItem(settingsStorageKey);
+    }
+    setSettingsReady(true);
     readLessonFromUrl();
     window.addEventListener("popstate", readLessonFromUrl);
     return () => window.removeEventListener("popstate", readLessonFromUrl);
   }, []);
+
+  useEffect(() => {
+    if (!settingsReady) return;
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.lang = language === "en" ? "en" : "zh-CN";
+    window.localStorage.setItem(
+      settingsStorageKey,
+      JSON.stringify({ language, theme }),
+    );
+  }, [language, settingsReady, theme]);
 
   const active = useMemo(
     () => allLessons.find(({ lesson }) => lesson.id === activeId),
@@ -676,26 +712,37 @@ export default function CourseShell() {
 
   if (!active) {
     return (
-      <CourseCover
-        chapters={chapters.map(({ number, title, description }) => ({
-          number,
-          title,
-          description,
-        }))}
-        onStart={() => openLesson(allLessons[0].lesson.id)}
-        onContinue={
-          lastLessonId ? () => openLesson(lastLessonId) : undefined
-        }
-        continueTitle={
-          lastLessonId
-            ? allLessons.find(({ lesson }) => lesson.id === lastLessonId)?.lesson
-                .title
-            : undefined
-        }
-      />
+      <>
+        <CourseCover
+          chapters={chapters.map(({ number, title, description }) => ({
+            number,
+            title,
+            description,
+          }))}
+          onStart={() => openLesson(allLessons[0].lesson.id)}
+          onContinue={
+            lastLessonId ? () => openLesson(lastLessonId) : undefined
+          }
+          continueTitle={
+            lastLessonId
+              ? allLessons.find(({ lesson }) => lesson.id === lastLessonId)?.lesson
+                  .title
+              : undefined
+          }
+          language={language}
+        />
+        <SiteSettings
+          language={language}
+          theme={theme}
+          onLanguageChange={setLanguage}
+          onThemeChange={setTheme}
+          cover
+        />
+      </>
     );
   }
 
+  const en = language === "en";
   const ActiveLesson = active.lesson.component;
   const previousLesson =
     activeIndex > 0
@@ -719,13 +766,13 @@ export default function CourseShell() {
     <div className="course-shell">
       <aside
         className={`course-sidebar ${sidebarOpen ? "is-open" : ""}`}
-        aria-label="课程目录"
+        aria-label={en ? "Course contents" : "课程目录"}
       >
         <div className="sidebar-brand">
           <button
             className="sidebar-home-button"
             onClick={() => openLesson("cover")}
-            aria-label="返回课程封面"
+            aria-label={en ? "Back to course cover" : "返回课程封面"}
             type="button"
           >
             <span className="sprout-logo" aria-hidden="true">
@@ -736,13 +783,13 @@ export default function CourseShell() {
             </span>
             <span className="sidebar-brand-copy">
               <strong>贝琪的代码实验室</strong>
-              <small>Python 学习课件</small>
+              <small>{en ? "Python learning course" : "Python 学习课件"}</small>
             </span>
           </button>
           <button
             className="sidebar-close"
             onClick={() => setSidebarOpen(false)}
-            aria-label="关闭课程目录"
+            aria-label={en ? "Close course contents" : "关闭课程目录"}
             type="button"
           >
             ×
@@ -751,9 +798,10 @@ export default function CourseShell() {
 
         <div className="course-progress">
           <div>
-            <span>内容状态</span>
+            <span>{en ? "LEARNING PROGRESS" : "内容状态"}</span>
             <strong>
-              {completedIds.length} / {allLessons.length} 已完成
+              {completedIds.length} / {allLessons.length}{" "}
+              {en ? "completed" : "已完成"}
             </strong>
           </div>
           <div className="progress-track" aria-hidden="true">
@@ -776,7 +824,11 @@ export default function CourseShell() {
                 <h2>{chapter.title}</h2>
                 {chapter.lessons.every((lesson) =>
                   completedIds.includes(lesson.id),
-                ) && <b className="chapter-complete-badge">完成</b>}
+                ) && (
+                  <b className="chapter-complete-badge">
+                    {en ? "DONE" : "完成"}
+                  </b>
+                )}
                 <p>{chapter.description}</p>
               </header>
               <div className="lesson-links">
@@ -803,10 +855,16 @@ export default function CourseShell() {
                         }`}
                         aria-label={
                           completedIds.includes(lesson.id)
-                            ? "已经完成"
+                            ? en
+                              ? "Completed"
+                              : "已经完成"
                             : lesson.status === "ready"
-                              ? "可以学习"
-                              : "待制作"
+                              ? en
+                                ? "Ready"
+                                : "可以学习"
+                              : en
+                                ? "Planned"
+                                : "待制作"
                         }
                       />
                     </button>
@@ -818,7 +876,7 @@ export default function CourseShell() {
         </nav>
 
         <footer className="sidebar-footer">
-          <span>当前课程</span>
+          <span>{en ? "CURRENT LESSON" : "当前课程"}</span>
           <strong>{active.lesson.title}</strong>
         </footer>
       </aside>
@@ -827,7 +885,7 @@ export default function CourseShell() {
         <button
           className="sidebar-scrim"
           onClick={() => setSidebarOpen(false)}
-          aria-label="关闭课程目录"
+          aria-label={en ? "Close course contents" : "关闭课程目录"}
           type="button"
         />
       )}
@@ -840,7 +898,7 @@ export default function CourseShell() {
             type="button"
           >
             <span aria-hidden="true">☰</span>
-            课程目录
+            {en ? "Contents" : "课程目录"}
           </button>
           <div className="toolbar-path">
             <span>{active.chapter.number}</span>
@@ -853,7 +911,7 @@ export default function CourseShell() {
             <button
               disabled={activeIndex <= 0}
               onClick={() => openLesson(allLessons[activeIndex - 1].lesson.id)}
-              aria-label="上一课"
+              aria-label={en ? "Previous lesson" : "上一课"}
               type="button"
             >
               ←
@@ -861,7 +919,7 @@ export default function CourseShell() {
             <button
               disabled={activeIndex >= allLessons.length - 1}
               onClick={() => openLesson(allLessons[activeIndex + 1].lesson.id)}
-              aria-label="下一课"
+              aria-label={en ? "Next lesson" : "下一课"}
               type="button"
             >
               →
@@ -882,9 +940,16 @@ export default function CourseShell() {
             onOpenLesson={openLesson}
             parentTip={chapterExtra?.parentTip ?? "让孩子先操作、先观察，再用自己的话说出发现。"}
             quiz={isLastInChapter ? chapterExtra?.quiz : undefined}
+            language={language}
           />
         </div>
       </main>
+      <SiteSettings
+        language={language}
+        theme={theme}
+        onLanguageChange={setLanguage}
+        onThemeChange={setTheme}
+      />
     </div>
   );
 }

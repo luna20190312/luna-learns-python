@@ -11,6 +11,7 @@ type CourseCoverProps = {
   onStart: () => void;
   onContinue?: () => void;
   continueTitle?: string;
+  language?: "zh" | "en";
 };
 
 const facts = [
@@ -45,7 +46,9 @@ export default function CourseCover({
   onStart,
   onContinue,
   continueTitle,
+  language = "zh",
 }: CourseCoverProps) {
+  const en = language === "en";
   return (
     <article className="course-cover">
       <section className="cover-hero">
@@ -65,12 +68,12 @@ export default function CourseCover({
           </p>
           <div className="cover-actions">
             <button className="cover-start" onClick={onStart} type="button">
-              开始学习
+              {en ? "Start learning" : "开始学习"}
               <span aria-hidden="true">→</span>
             </button>
             {onContinue && (
               <button className="cover-continue" onClick={onContinue} type="button">
-                <span>继续学习</span>
+                <span>{en ? "Continue" : "继续学习"}</span>
                 <small>{continueTitle}</small>
               </button>
             )}

@@ -55,13 +55,18 @@ test("server-renders the Luna Learns Python course home", async () => {
 
 test("registers every lesson and bundles the browser Python runtime", async () => {
   const lessonsRoot = new URL("../app/lessons/", import.meta.url);
-  const [files, courseShell, playground] = await Promise.all([
+  const [files, courseShell, playground, siteSettings, theme] = await Promise.all([
     readdir(lessonsRoot),
     readFile(new URL("../app/components/CourseShell.tsx", import.meta.url), "utf8"),
     readFile(
       new URL("../app/components/PythonPlayground.tsx", import.meta.url),
       "utf8",
     ),
+    readFile(
+      new URL("../app/components/SiteSettings.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../app/theme.css", import.meta.url), "utf8"),
     access(new URL("../public/runtime/skulpt.min.js", import.meta.url)),
     access(new URL("../public/runtime/skulpt-stdlib.js", import.meta.url)),
   ]);
@@ -83,8 +88,10 @@ test("registers every lesson and bundles the browser Python runtime", async () =
   assert.match(courseShell, /window\.localStorage\.setItem/);
   assert.match(courseShell, /completed-lessons/);
   assert.match(courseShell, /CourseLessonFooter/);
+  assert.match(courseShell, /SiteSettings/);
+  assert.match(courseShell, /luna-learns-python:settings/);
   assert.match(courseShell, /chapter:\s*allLessons\[activeIndex [+-] 1\]\.chapter\.number/);
-  assert.match(courseShell, /aria-label="返回课程封面"/);
+  assert.match(courseShell, /返回课程封面/);
   assert.doesNotMatch(courseShell, /cover-nav-link/);
   assert.match(playground, /\/runtime\/skulpt\.min\.js/);
   assert.match(playground, /\/runtime\/skulpt-stdlib\.js/);
@@ -92,4 +99,9 @@ test("registers every lesson and bundles the browser Python runtime", async () =
   assert.match(playground, /inputfunTakesPrompt:\s*true/);
   assert.match(playground, /Sk\.TurtleGraphics/);
   assert.match(playground, /luna-learns-python:code/);
+  assert.match(siteSettings, /马卡龙糖果/);
+  assert.match(siteSettings, /薄荷乐园/);
+  assert.match(siteSettings, /蓝莓星空/);
+  assert.match(theme, /data-theme="mint"/);
+  assert.match(theme, /data-theme="classic"/);
 });
