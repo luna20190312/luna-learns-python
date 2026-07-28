@@ -11,7 +11,7 @@ export default function Lesson11_05() {
   const [end, setEnd] = useState(4);
   const code = useMemo(() => `word = "PYTHON"\n\nprint(word[${start}:${end}])`, [end, start]);
   return (
-    <LessonFrame chapter="高阶第 1 章 · 通往完整 Python" lesson="05" title="一次取出一段内容"
+    <LessonFrame chapter="高阶 第 11 章 · 通往完整 Python" lesson="05" title="一次取出一段内容"
       lead="下标一次取一项，切片可以从起点开始，一直取到终点之前。"
       goal="内容[start:end] 会取出一段，包含 start，不包含 end。"
       closing="切片和 range() 一样：起点出现，终点不出现。">

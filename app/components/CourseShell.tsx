@@ -451,7 +451,7 @@ const chapters: ChapterEntry[] = [
     ],
   },
   {
-    number: "高阶第 1 章",
+    number: "高阶 第 11 章",
     title: "通往完整 Python",
     description: "类型、逻辑、异常与模块",
     lessons: [
@@ -585,7 +585,7 @@ const chapterLearningExtras: Record<
       explanation: "先运行成功，再一次增加一个功能，更容易发现和解决问题。",
     },
   },
-  "高阶第 1 章": {
+  "高阶 第 11 章": {
     parentTip: "这一章术语稍多，重点是能辨认和使用，不要求一次记住所有英文名称。",
     quiz: {
       question: "网页实验台和完整桌面 Python 的关系是什么？",

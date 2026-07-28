@@ -9,7 +9,7 @@ export default function Lesson11_03() {
   const [energy, setEnergy] = useState(60);
   const canOpen = key && energy >= 50;
   return (
-    <LessonFrame chapter="高阶第 1 章 · 通往完整 Python" lesson="03" title="同时检查多个条件"
+    <LessonFrame chapter="高阶 第 11 章 · 通往完整 Python" lesson="03" title="同时检查多个条件"
       lead="有些任务需要两条规则同时成立，或者只要其中一条成立。and、or、not 可以组合条件。"
       goal="and 要求都成立，or 只需一个成立，not 会把真假反过来。"
       closing="先分别读懂每个小条件，再看连接它们的是 and 还是 or。">

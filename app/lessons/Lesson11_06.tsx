@@ -9,7 +9,7 @@ export default function Lesson11_06() {
   const [checked, setChecked] = useState(false);
   const valid = /^-?\d+$/.test(answer);
   return (
-    <LessonFrame chapter="高阶第 1 章 · 通往完整 Python" lesson="06" title="程序出错也能继续"
+    <LessonFrame chapter="高阶 第 11 章 · 通往完整 Python" lesson="06" title="程序出错也能继续"
       lead="使用者可能输入意外内容。try 先尝试，except 在失败时接住错误并给出友好提示。"
       goal="try / except 可以处理预料得到的错误，让程序安全继续。"
       closing="不是隐藏所有错误，而是接住我们知道怎样处理的错误。">

@@ -9,7 +9,7 @@ const checklist = ["我会新建 .py 文件", "我会保存并再次打开", "�
 export default function Lesson11_08() {
   const [checked, setChecked] = useState<string[]>([]);
   return (
-    <LessonFrame chapter="高阶第 1 章 · 通往完整 Python" lesson="08" title="浏览器 Python 与完整 Python"
+    <LessonFrame chapter="高阶 第 11 章 · 通往完整 Python" lesson="08" title="浏览器 Python 与完整 Python"
       lead="网页实验台适合学习基础，但完整 Python 还能保存文件、安装第三方库和制作更大的项目。"
       goal="知道当前环境的边界，并准备把已经学会的语法带到桌面 Python。"
       closing="运行环境会改变，但 Python 的核心语法仍然是同一种语言。">
@@ -20,7 +20,7 @@ export default function Lesson11_08() {
           <div className="transition-checklist">{checklist.map((item) => <button className={checked.includes(item) ? "checked" : ""} type="button" onClick={() => setChecked((items) => items.includes(item) ? items.filter((x) => x !== item) : [...items, item])} key={item}><span>{checked.includes(item) ? "✓" : "○"}</span>{item}</button>)}<strong>{checked.length === checklist.length ? "通行证已准备好！" : `${checked.length} / 4 已确认`}</strong></div>
         </div>
       </section>
-      <PythonPlayground initialCode={`skills = ["变量", "条件", "循环", "函数", "列表", "字典"]\n\nprint("我已经学会：")\nfor skill in skills:\n    print("✓", skill)\n\nprint("下一站：完整 Python")`} title="运行高阶第 1 章结业清单" prompt="在 skills 中加入一项你最喜欢的能力。" />
+      <PythonPlayground initialCode={`skills = ["变量", "条件", "循环", "函数", "列表", "字典"]\n\nprint("我已经学会：")\nfor skill in skills:\n    print("✓", skill)\n\nprint("下一站：完整 Python")`} title="运行高阶 第 11 章结业清单" prompt="在 skills 中加入一项你最喜欢的能力。" />
     </LessonFrame>
   );
 }

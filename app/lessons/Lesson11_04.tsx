@@ -8,7 +8,7 @@ export default function Lesson11_04() {
   const [numbers, setNumbers] = useState([6, 3, 9]);
   const code = useMemo(() => `scores = [${numbers.join(", ")}]\n\nprint("最小：", min(scores))\nprint("最大：", max(scores))\nprint("总和：", sum(scores))\nprint("平均：", round(sum(scores) / len(scores), 1))`, [numbers]);
   return (
-    <LessonFrame chapter="高阶第 1 章 · 通往完整 Python" lesson="04" title="Python 的常用小工具"
+    <LessonFrame chapter="高阶 第 11 章 · 通往完整 Python" lesson="04" title="Python 的常用小工具"
       lead="不用自己写循环也能找最小值、最大值和总和。Python 已经准备了一些常用工具。"
       goal="min()、max()、sum() 和 round() 可以完成常见的数字任务。"
       closing="先寻找 Python 已有的工具，再决定是否需要自己造一个。">

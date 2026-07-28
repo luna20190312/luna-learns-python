@@ -15,7 +15,7 @@ export default function Lesson11_07() {
   const [moduleName, setModuleName] = useState<ModuleName>("random");
   const module = modules[moduleName];
   return (
-    <LessonFrame chapter="高阶第 1 章 · 通往完整 Python" lesson="07" title="工具从哪里来"
+    <LessonFrame chapter="高阶 第 11 章 · 通往完整 Python" lesson="07" title="工具从哪里来"
       lead="Python 不会一开始搬来所有工具。import 像打开一个工具箱，需要什么模块就导入什么。"
       goal="import 模块名 会让程序使用这个模块提供的工具。"
       closing="模块是一组有关联的工具，import 负责把它请进程序。">

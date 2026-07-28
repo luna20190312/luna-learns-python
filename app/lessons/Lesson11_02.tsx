@@ -9,7 +9,7 @@ export default function Lesson11_02() {
   const [converted, setConverted] = useState(false);
   const valid = /^-?\d+$/.test(textNumber);
   return (
-    <LessonFrame chapter="高阶第 1 章 · 通往完整 Python" lesson="02" title="数据变身术"
+    <LessonFrame chapter="高阶 第 11 章 · 通往完整 Python" lesson="02" title="数据变身术"
       lead="input() 得到的总是文字。想参加数字计算，要先用 int() 或 float() 把它转换。"
       goal="int() 变成整数，float() 变成小数，str() 变成文字。"
       closing="转换不是改变外表，而是让 Python 用另一种类型理解数据。">

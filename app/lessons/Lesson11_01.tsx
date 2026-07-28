@@ -15,7 +15,7 @@ export default function Lesson11_01() {
   const [selected, setSelected] = useState(0);
   const value = values[selected];
   return (
-    <LessonFrame chapter="高阶第 1 章 · 通往完整 Python" lesson="01" title="数据也有不同种类"
+    <LessonFrame chapter="高阶 第 11 章 · 通往完整 Python" lesson="01" title="数据也有不同种类"
       lead="数字、文字和真假看起来不同，Python 也会给它们分配不同的数据类型。"
       goal="int、float、str 和 bool 是四种常见的数据类型。"
       closing="数据类型告诉 Python：这个值是什么，以及它能参加什么操作。">
