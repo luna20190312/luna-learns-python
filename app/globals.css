@@ -376,8 +376,14 @@ button {
 }
 
 .site-settings-trigger > span {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  font-family: "Apple Symbols", "Segoe UI Symbol", sans-serif;
   font-size: 40px;
   line-height: 1;
+  transform-box: border-box;
   transform-origin: center;
   transition: transform 420ms ease-in-out;
 }
