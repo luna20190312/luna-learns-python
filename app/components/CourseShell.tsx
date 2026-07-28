@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import CourseCover from "./CourseCover";
+import CourseLessonFooter from "./CourseLessonFooter";
+import { LessonSessionProvider } from "./LessonSessionContext";
 import Lesson00_01 from "../lessons/Lesson00_01";
 import Lesson01_01 from "../lessons/Lesson01_01";
 import Lesson01_02 from "../lessons/Lesson01_02";
@@ -63,6 +65,14 @@ import Lesson10_03 from "../lessons/Lesson10_03";
 import Lesson10_04 from "../lessons/Lesson10_04";
 import Lesson10_05 from "../lessons/Lesson10_05";
 import Lesson10_06 from "../lessons/Lesson10_06";
+import Lesson11_01 from "../lessons/Lesson11_01";
+import Lesson11_02 from "../lessons/Lesson11_02";
+import Lesson11_03 from "../lessons/Lesson11_03";
+import Lesson11_04 from "../lessons/Lesson11_04";
+import Lesson11_05 from "../lessons/Lesson11_05";
+import Lesson11_06 from "../lessons/Lesson11_06";
+import Lesson11_07 from "../lessons/Lesson11_07";
+import Lesson11_08 from "../lessons/Lesson11_08";
 
 type LessonEntry = {
   id: string;
@@ -440,6 +450,21 @@ const chapters: ChapterEntry[] = [
       { id: "10-06", number: "第 6 课", title: "我的第一个独立作品", component: Lesson10_06, status: "ready" },
     ],
   },
+  {
+    number: "高阶第 1 章",
+    title: "通往完整 Python",
+    description: "类型、逻辑、异常与模块",
+    lessons: [
+      { id: "11-01", number: "第 1 课", title: "数据也有不同种类", component: Lesson11_01, status: "ready" },
+      { id: "11-02", number: "第 2 课", title: "数据变身术", component: Lesson11_02, status: "ready" },
+      { id: "11-03", number: "第 3 课", title: "同时检查多个条件", component: Lesson11_03, status: "ready" },
+      { id: "11-04", number: "第 4 课", title: "Python 的常用小工具", component: Lesson11_04, status: "ready" },
+      { id: "11-05", number: "第 5 课", title: "一次取出一段内容", component: Lesson11_05, status: "ready" },
+      { id: "11-06", number: "第 6 课", title: "程序出错也能继续", component: Lesson11_06, status: "ready" },
+      { id: "11-07", number: "第 7 课", title: "工具从哪里来", component: Lesson11_07, status: "ready" },
+      { id: "11-08", number: "第 8 课", title: "浏览器 Python 与完整 Python", component: Lesson11_08, status: "ready" },
+    ],
+  },
 ];
 
 const allLessons = chapters.flatMap((chapter) =>
@@ -447,11 +472,135 @@ const allLessons = chapters.flatMap((chapter) =>
 );
 
 const progressStorageKey = "luna-learns-python:last-lesson";
+const completionStorageKey = "luna-learns-python:completed-lessons";
+
+const chapterLearningExtras: Record<
+  string,
+  {
+    parentTip: string;
+    quiz: {
+      question: string;
+      options: string[];
+      answer: number;
+      explanation: string;
+    };
+  }
+> = {
+  "第 0 章": {
+    parentTip: "先让孩子自由点击和修改，不急着解释语法；能说出“代码会产生结果”就足够。",
+    quiz: {
+      question: "想知道一段代码会发生什么，最直接的方法是什么？",
+      options: ["运行它并观察", "把它背下来", "只看代码颜色"],
+      answer: 0,
+      explanation: "编程学习最重要的习惯之一，就是运行、观察，再做一次小修改。",
+    },
+  },
+  "第 1 章": {
+    parentTip: "请孩子用自己的话说出每一行做什么，不要求背诵英文单词。",
+    quiz: {
+      question: "变量最像下面哪一种东西？",
+      options: ["贴着名字的盒子", "只能按一次的按钮", "永远不变的图片"],
+      answer: 0,
+      explanation: "变量用名字保存数据，盒子里的内容还可以被换成新的。",
+    },
+  },
+  "第 2 章": {
+    parentTip: "用生活中的选择提问，例如“如果下雨怎么办”，帮助孩子把条件和行动联系起来。",
+    quiz: {
+      question: "if 后面的条件成立时，会发生什么？",
+      options: ["执行缩进的代码", "关闭整个程序", "跳过所有代码"],
+      answer: 0,
+      explanation: "if 先检查条件，条件为 True 才执行属于它的缩进代码。",
+    },
+  },
+  "第 3 章": {
+    parentTip: "让孩子先猜循环会重复几次，再运行验证；猜错也属于实验的一部分。",
+    quiz: {
+      question: "什么时候最适合想到循环？",
+      options: ["同一件事要重复很多次", "只需要显示一个字", "准备关闭网页"],
+      answer: 0,
+      explanation: "循环就是把重复工作交给计算机。",
+    },
+  },
+  "第 4 章": {
+    parentTip: "把函数叫作“自己发明的新指令”，先关注输入和结果，不必强调正式术语。",
+    quiz: {
+      question: "定义函数以后，怎样让它真正工作？",
+      options: ["调用函数", "只写 def", "删除括号"],
+      answer: 0,
+      explanation: "def 是教会计算机新指令，写出函数名和括号才是调用它。",
+    },
+  },
+  "第 5 章": {
+    parentTip: "可以用真实书包和几件小物品演示列表顺序以及从 0 开始的下标。",
+    quiz: {
+      question: "列表中第一项的下标是多少？",
+      options: ["0", "1", "-1"],
+      answer: 0,
+      explanation: "Python 从 0 开始计算位置，所以第一项是 0。",
+    },
+  },
+  "第 6 章": {
+    parentTip: "把一个汉字、字母、标点和空格分别写在纸片上，帮助孩子理解字符。",
+    quiz: {
+      question: "len() 可以告诉我们什么？",
+      options: ["文字有多少个字符", "文字是什么颜色", "文字应该放在哪里"],
+      answer: 0,
+      explanation: "len() 用来测量字符串或列表中一共有多少项。",
+    },
+  },
+  "第 7 章": {
+    parentTip: "让孩子先用手比划海龟前进和转弯，再修改距离或角度。",
+    quiz: {
+      question: "在坐标中，哪个数字控制左右位置？",
+      options: ["x", "y", "颜色"],
+      answer: 0,
+      explanation: "x 控制左右，y 控制上下。",
+    },
+  },
+  "第 8 章": {
+    parentTip: "可以拿一张人物资料卡，让孩子指出哪些是标签、哪些是标签后的内容。",
+    quiz: {
+      question: "字典主要用什么查找资料？",
+      options: ["键", "固定数字下标", "循环次数"],
+      answer: 0,
+      explanation: "字典通过自己命名的键找到对应的值。",
+    },
+  },
+  "第 9 章": {
+    parentTip: "遇到错误时不要直接指出答案，先问“错误说第几行、哪个名字”。",
+    quiz: {
+      question: "代码出错后，最好的第一步是什么？",
+      options: ["阅读错误线索", "删除全部代码", "随便改很多地方"],
+      answer: 0,
+      explanation: "先读错误位置和种类，再一次只修改一个地方。",
+    },
+  },
+  "第 10 章": {
+    parentTip: "作品不必一次完成；鼓励孩子先做一个能运行的小版本，再逐步加想法。",
+    quiz: {
+      question: "开始独立作品时，最稳妥的方法是什么？",
+      options: ["先做最小可运行版本", "一次加入所有功能", "只设计不运行"],
+      answer: 0,
+      explanation: "先运行成功，再一次增加一个功能，更容易发现和解决问题。",
+    },
+  },
+  "高阶第 1 章": {
+    parentTip: "这一章术语稍多，重点是能辨认和使用，不要求一次记住所有英文名称。",
+    quiz: {
+      question: "网页实验台和完整桌面 Python 的关系是什么？",
+      options: ["核心语法相同，运行环境能力不同", "是两种完全不同的语言", "只有网页版本能运行代码"],
+      answer: 0,
+      explanation: "变量、条件、循环等核心语法相同；桌面 Python 还能使用文件和更多软件包。",
+    },
+  },
+};
 
 export default function CourseShell() {
   const [activeId, setActiveId] = useState("cover");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [lastLessonId, setLastLessonId] = useState<string | null>(null);
+  const [completedIds, setCompletedIds] = useState<string[]>([]);
 
   useEffect(() => {
     const readLessonFromUrl = () => {
@@ -471,6 +620,20 @@ export default function CourseShell() {
       allLessons.some(({ lesson }) => lesson.id === savedLesson)
     ) {
       setLastLessonId(savedLesson);
+    }
+    try {
+      const savedCompleted = JSON.parse(
+        window.localStorage.getItem(completionStorageKey) ?? "[]",
+      );
+      if (Array.isArray(savedCompleted)) {
+        setCompletedIds(
+          savedCompleted.filter((id) =>
+            allLessons.some(({ lesson }) => lesson.id === id),
+          ),
+        );
+      }
+    } catch {
+      window.localStorage.removeItem(completionStorageKey);
     }
     readLessonFromUrl();
     window.addEventListener("popstate", readLessonFromUrl);
@@ -501,6 +664,16 @@ export default function CourseShell() {
     document.querySelector(".course-main")?.scrollTo({ top: 0 });
   }
 
+  function toggleCompleted(id: string) {
+    setCompletedIds((current) => {
+      const next = current.includes(id)
+        ? current.filter((lessonId) => lessonId !== id)
+        : [...current, id];
+      window.localStorage.setItem(completionStorageKey, JSON.stringify(next));
+      return next;
+    });
+  }
+
   if (!active) {
     return (
       <CourseCover
@@ -524,6 +697,15 @@ export default function CourseShell() {
   }
 
   const ActiveLesson = active.lesson.component;
+  const previousLesson =
+    activeIndex > 0 ? allLessons[activeIndex - 1].lesson : undefined;
+  const nextLesson =
+    activeIndex < allLessons.length - 1
+      ? allLessons[activeIndex + 1].lesson
+      : undefined;
+  const chapterExtra = chapterLearningExtras[active.chapter.number];
+  const isLastInChapter =
+    active.chapter.lessons.at(-1)?.id === active.lesson.id;
 
   return (
     <div className="course-shell">
@@ -563,17 +745,14 @@ export default function CourseShell() {
           <div>
             <span>内容状态</span>
             <strong>
-              {allLessons.filter(({ lesson }) => lesson.status === "ready").length} /{" "}
-              {allLessons.length} 可学习
+              {completedIds.length} / {allLessons.length} 已完成
             </strong>
           </div>
           <div className="progress-track" aria-hidden="true">
             <i
               style={{
                 width: `${
-                  (allLessons.filter(({ lesson }) => lesson.status === "ready")
-                    .length /
-                    allLessons.length) *
+                  (completedIds.length / allLessons.length) *
                   100
                 }%`,
               }}
@@ -587,6 +766,9 @@ export default function CourseShell() {
               <header>
                 <span>{chapter.number}</span>
                 <h2>{chapter.title}</h2>
+                {chapter.lessons.every((lesson) =>
+                  completedIds.includes(lesson.id),
+                ) && <b className="chapter-complete-badge">完成</b>}
                 <p>{chapter.description}</p>
               </header>
               <div className="lesson-links">
@@ -606,8 +788,18 @@ export default function CourseShell() {
                         <strong>{lesson.title}</strong>
                       </span>
                       <i
-                        className={`lesson-state ${lesson.status}`}
-                        aria-label={lesson.status === "ready" ? "可以学习" : "待制作"}
+                        className={`lesson-state ${
+                          completedIds.includes(lesson.id)
+                            ? "completed"
+                            : lesson.status
+                        }`}
+                        aria-label={
+                          completedIds.includes(lesson.id)
+                            ? "已经完成"
+                            : lesson.status === "ready"
+                              ? "可以学习"
+                              : "待制作"
+                        }
                       />
                     </button>
                   );
@@ -670,7 +862,19 @@ export default function CourseShell() {
         </header>
 
         <div className="course-content" key={active.lesson.id}>
-          <ActiveLesson />
+          <LessonSessionProvider lessonId={active.lesson.id}>
+            <ActiveLesson />
+          </LessonSessionProvider>
+          <CourseLessonFooter
+            lessonId={active.lesson.id}
+            completed={completedIds.includes(active.lesson.id)}
+            onToggleComplete={() => toggleCompleted(active.lesson.id)}
+            previous={previousLesson}
+            next={nextLesson}
+            onOpenLesson={openLesson}
+            parentTip={chapterExtra?.parentTip ?? "让孩子先操作、先观察，再用自己的话说出发现。"}
+            quiz={isLastInChapter ? chapterExtra?.quiz : undefined}
+          />
         </div>
       </main>
     </div>

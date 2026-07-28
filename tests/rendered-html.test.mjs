@@ -48,6 +48,7 @@ test("server-renders the Luna Learns Python course home", async () => {
   assert.match(html, /给数据贴上名字/);
   assert.match(html, /成为代码侦探/);
   assert.match(html, /Python 小小创作家/);
+  assert.match(html, /通往完整 Python/);
   assert.doesNotMatch(html, /class="course-shell"/);
   assert.doesNotMatch(html, /aria-label="课程目录"/);
 });
@@ -66,7 +67,7 @@ test("registers every lesson and bundles the browser Python runtime", async () =
   ]);
 
   const lessonFiles = files.filter((file) => /^Lesson\d{2}_\d{2}\.tsx$/.test(file));
-  assert.equal(lessonFiles.length, 61);
+  assert.equal(lessonFiles.length, 69);
 
   for (const file of lessonFiles) {
     const component = file.replace(".tsx", "");
@@ -76,10 +77,12 @@ test("registers every lesson and bundles the browser Python runtime", async () =
 
   assert.equal(
     (courseShell.match(/status: "ready"(?=,|\s*})/g) ?? []).length,
-    61,
+    69,
   );
   assert.match(courseShell, /luna-learns-python:last-lesson/);
   assert.match(courseShell, /window\.localStorage\.setItem/);
+  assert.match(courseShell, /completed-lessons/);
+  assert.match(courseShell, /CourseLessonFooter/);
   assert.match(courseShell, /aria-label="返回课程封面"/);
   assert.doesNotMatch(courseShell, /cover-nav-link/);
   assert.match(playground, /\/runtime\/skulpt\.min\.js/);
@@ -87,4 +90,5 @@ test("registers every lesson and bundles the browser Python runtime", async () =
   assert.match(playground, /Sk\.importMainWithBody/);
   assert.match(playground, /inputfunTakesPrompt:\s*true/);
   assert.match(playground, /Sk\.TurtleGraphics/);
+  assert.match(playground, /luna-learns-python:code/);
 });

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import { useLessonSessionId } from "./LessonSessionContext";
 
 declare global {
   interface Window {
@@ -71,8 +72,11 @@ export default function PythonPlayground({
   turtle = false,
   inputDefaults = [],
 }: PythonPlaygroundProps) {
+  const lessonId = useLessonSessionId();
   const turtleTargetId = `turtle-${useId().replaceAll(":", "")}`;
+  const codeStorageKey = `luna-learns-python:code:${lessonId}`;
   const [code, setCode] = useState(initialCode);
+  const [storageReady, setStorageReady] = useState(false);
   const [ready, setReady] = useState(false);
   const [running, setRunning] = useState(false);
   const [output, setOutput] = useState("");
@@ -80,6 +84,18 @@ export default function PythonPlayground({
   const [inputValues, setInputValues] = useState(
     inputDefaults.map((item) => item.value),
   );
+
+  useEffect(() => {
+    const savedCode = window.localStorage.getItem(codeStorageKey);
+    setCode(savedCode ?? initialCode);
+    setStorageReady(true);
+  }, [codeStorageKey]);
+
+  useEffect(() => {
+    if (storageReady) {
+      window.localStorage.setItem(codeStorageKey, code);
+    }
+  }, [code, codeStorageKey, storageReady]);
 
   useEffect(() => {
     let active = true;
@@ -159,6 +175,10 @@ export default function PythonPlayground({
           恢复代码
         </button>
       </header>
+      <div className="playground-save-note">
+        <span aria-hidden="true">●</span>
+        修改的代码会自动保存在当前浏览器
+      </div>
       {inputDefaults.length > 0 && (
         <div className="playground-inputs">
           <span>运行时将依次输入</span>
