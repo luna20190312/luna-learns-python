@@ -15,6 +15,12 @@ import Lesson02_03 from "../lessons/Lesson02_03";
 import Lesson02_04 from "../lessons/Lesson02_04";
 import Lesson02_05 from "../lessons/Lesson02_05";
 import Lesson02_06 from "../lessons/Lesson02_06";
+import Lesson03_01 from "../lessons/Lesson03_01";
+import Lesson03_02 from "../lessons/Lesson03_02";
+import Lesson03_03 from "../lessons/Lesson03_03";
+import Lesson03_04 from "../lessons/Lesson03_04";
+import Lesson03_05 from "../lessons/Lesson03_05";
+import Lesson03_06 from "../lessons/Lesson03_06";
 
 type LessonEntry = {
   id: string;
@@ -140,6 +146,55 @@ const chapters: ChapterEntry[] = [
         number: "第 6 课",
         title: "魔法门闯关",
         component: Lesson02_06,
+        status: "ready",
+      },
+    ],
+  },
+  {
+    number: "第 3 章",
+    title: "让程序重复工作",
+    description: "for、range 与 while 循环",
+    lessons: [
+      {
+        id: "03-01",
+        number: "第 1 课",
+        title: "重复说三遍",
+        component: Lesson03_01,
+        status: "ready",
+      },
+      {
+        id: "03-02",
+        number: "第 2 课",
+        title: "用 for 自动重复",
+        component: Lesson03_02,
+        status: "ready",
+      },
+      {
+        id: "03-03",
+        number: "第 3 课",
+        title: "range() 数字制造机",
+        component: Lesson03_03,
+        status: "ready",
+      },
+      {
+        id: "03-04",
+        number: "第 4 课",
+        title: "倒计时开始",
+        component: Lesson03_04,
+        status: "ready",
+      },
+      {
+        id: "03-05",
+        number: "第 5 课",
+        title: "不知道次数怎么办",
+        component: Lesson03_05,
+        status: "ready",
+      },
+      {
+        id: "03-06",
+        number: "第 6 课",
+        title: "猜数字小游戏",
+        component: Lesson03_06,
         status: "ready",
       },
     ],
