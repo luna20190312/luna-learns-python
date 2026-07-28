@@ -698,10 +698,18 @@ export default function CourseShell() {
 
   const ActiveLesson = active.lesson.component;
   const previousLesson =
-    activeIndex > 0 ? allLessons[activeIndex - 1].lesson : undefined;
+    activeIndex > 0
+      ? {
+          ...allLessons[activeIndex - 1].lesson,
+          chapter: allLessons[activeIndex - 1].chapter.number,
+        }
+      : undefined;
   const nextLesson =
     activeIndex < allLessons.length - 1
-      ? allLessons[activeIndex + 1].lesson
+      ? {
+          ...allLessons[activeIndex + 1].lesson,
+          chapter: allLessons[activeIndex + 1].chapter.number,
+        }
       : undefined;
   const chapterExtra = chapterLearningExtras[active.chapter.number];
   const isLastInChapter =

@@ -83,6 +83,7 @@ test("registers every lesson and bundles the browser Python runtime", async () =
   assert.match(courseShell, /window\.localStorage\.setItem/);
   assert.match(courseShell, /completed-lessons/);
   assert.match(courseShell, /CourseLessonFooter/);
+  assert.match(courseShell, /chapter:\s*allLessons\[activeIndex [+-] 1\]\.chapter\.number/);
   assert.match(courseShell, /aria-label="返回课程封面"/);
   assert.doesNotMatch(courseShell, /cover-nav-link/);
   assert.match(playground, /\/runtime\/skulpt\.min\.js/);

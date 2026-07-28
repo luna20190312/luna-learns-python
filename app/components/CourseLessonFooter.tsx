@@ -4,6 +4,7 @@ import { useState } from "react";
 
 type LessonLink = {
   id: string;
+  chapter: string;
   number: string;
   title: string;
 };
@@ -103,7 +104,9 @@ export default function CourseLessonFooter({
         >
           <span>← 上一课</span>
           <strong>
-            {previous ? `${previous.number} · ${previous.title}` : "已经是第一课"}
+            {previous
+              ? `${previous.chapter} · ${previous.number} · ${previous.title}`
+              : "已经是第一课"}
           </strong>
         </button>
         <button
@@ -113,7 +116,9 @@ export default function CourseLessonFooter({
         >
           <span>下一课 →</span>
           <strong>
-            {next ? `${next.number} · ${next.title}` : "已经完成全部课程"}
+            {next
+              ? `${next.chapter} · ${next.number} · ${next.title}`
+              : "已经完成全部课程"}
           </strong>
         </button>
       </nav>
