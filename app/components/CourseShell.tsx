@@ -27,6 +27,12 @@ import Lesson04_03 from "../lessons/Lesson04_03";
 import Lesson04_04 from "../lessons/Lesson04_04";
 import Lesson04_05 from "../lessons/Lesson04_05";
 import Lesson04_06 from "../lessons/Lesson04_06";
+import Lesson05_01 from "../lessons/Lesson05_01";
+import Lesson05_02 from "../lessons/Lesson05_02";
+import Lesson05_03 from "../lessons/Lesson05_03";
+import Lesson05_04 from "../lessons/Lesson05_04";
+import Lesson05_05 from "../lessons/Lesson05_05";
+import Lesson05_06 from "../lessons/Lesson05_06";
 
 type LessonEntry = {
   id: string;
@@ -250,6 +256,55 @@ const chapters: ChapterEntry[] = [
         number: "第 6 课",
         title: "建造小小工具箱",
         component: Lesson04_06,
+        status: "ready",
+      },
+    ],
+  },
+  {
+    number: "第 5 章",
+    title: "一次记住很多东西",
+    description: "列表、下标与遍历",
+    lessons: [
+      {
+        id: "05-01",
+        number: "第 1 课",
+        title: "装着宝物的背包",
+        component: Lesson05_01,
+        status: "ready",
+      },
+      {
+        id: "05-02",
+        number: "第 2 课",
+        title: "找到第几个宝物",
+        component: Lesson05_02,
+        status: "ready",
+      },
+      {
+        id: "05-03",
+        number: "第 3 课",
+        title: "把新宝物放进去",
+        component: Lesson05_03,
+        status: "ready",
+      },
+      {
+        id: "05-04",
+        number: "第 4 课",
+        title: "宝物也能被拿走",
+        component: Lesson05_04,
+        status: "ready",
+      },
+      {
+        id: "05-05",
+        number: "第 5 课",
+        title: "逐个查看背包",
+        component: Lesson05_05,
+        status: "ready",
+      },
+      {
+        id: "05-06",
+        number: "第 6 课",
+        title: "随机抽取幸运宝物",
+        component: Lesson05_06,
         status: "ready",
       },
     ],

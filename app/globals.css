@@ -5173,6 +5173,831 @@ button {
   font-style: normal;
 }
 
+.backpack-lab,
+.append-lab,
+.edit-list-lab,
+.traverse-lab {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 430px;
+}
+
+.treasure-shelf {
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-content: center;
+  gap: 11px;
+  border-right: 2px solid var(--ink);
+  background: #fff8dd;
+}
+
+.treasure-shelf button,
+.indexed-list button,
+.append-control button,
+.editable-slots button,
+.edit-list-controls button,
+.traverse-code button,
+.lucky-chest button {
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  color: var(--ink);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 900;
+}
+
+.treasure-shelf button {
+  min-height: 125px;
+  padding: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: white;
+}
+
+.treasure-shelf button.packed {
+  background: var(--lime);
+  box-shadow: 4px 4px 0 var(--ink);
+  transform: translateY(-2px);
+}
+
+.treasure-shelf button > span {
+  font-size: 37px;
+}
+
+.treasure-shelf button strong {
+  margin: 5px 0 3px;
+}
+
+.treasure-shelf button small {
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.backpack {
+  padding: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: var(--navy);
+  color: white;
+}
+
+.backpack-pocket {
+  position: relative;
+  width: 250px;
+  min-height: 205px;
+  padding: 45px 25px 25px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  gap: 9px;
+  border: 5px solid white;
+  border-radius: 55px 55px 35px 35px;
+  background: #395f79;
+  box-shadow: inset 0 -45px 0 #2b4d65, 8px 8px 0 var(--lime);
+}
+
+.backpack-pocket::before {
+  position: absolute;
+  top: -35px;
+  width: 105px;
+  height: 60px;
+  content: "";
+  border: 5px solid white;
+  border-bottom: 0;
+  border-radius: 50px 50px 0 0;
+}
+
+.backpack-pocket p {
+  color: #bed0dc;
+  font-size: 11px;
+}
+
+.backpack-pocket span {
+  z-index: 1;
+  display: grid;
+  width: 55px;
+  height: 55px;
+  place-items: center;
+  border: 2px solid white;
+  border-radius: 13px;
+  background: #18384f;
+  font-size: 27px;
+  animation: pop-in 180ms ease-out;
+}
+
+.backpack > strong {
+  margin-top: 20px;
+}
+
+.backpack > code {
+  max-width: 100%;
+  margin: 8px 0;
+  padding: 9px 11px;
+  overflow: hidden;
+  border: 1px solid #58758a;
+  border-radius: 7px;
+  color: var(--lime);
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.backpack > small {
+  color: #aebfcb;
+}
+
+.list-anatomy {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: white;
+}
+
+.list-anatomy > div {
+  padding: 14px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3px 11px;
+  border-radius: 8px;
+  background: #effaff;
+}
+
+.list-anatomy code {
+  grid-row: 1 / 3;
+  display: grid;
+  min-width: 42px;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--yellow);
+  font-family: ui-monospace, monospace;
+  font-weight: 900;
+}
+
+.list-anatomy strong {
+  font-size: 11px;
+}
+
+.list-anatomy span {
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.index-lab {
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  align-items: center;
+  gap: 32px;
+  background: #f4f7f5;
+}
+
+.indexed-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.indexed-list button {
+  min-width: 0;
+  padding: 11px 6px 14px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: white;
+}
+
+.indexed-list button.selected {
+  background: var(--yellow);
+  box-shadow: 4px 4px 0 var(--ink);
+  transform: translateY(-4px);
+}
+
+.indexed-list small {
+  width: calc(100% + 12px);
+  margin: -11px -6px 12px;
+  padding: 7px 3px;
+  border-bottom: 2px solid var(--ink);
+  background: var(--navy);
+  color: white;
+  font-size: 8px;
+}
+
+.indexed-list span {
+  font-size: 36px;
+}
+
+.indexed-list strong {
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+.index-reader {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.index-reader > code {
+  padding: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--navy);
+  color: white;
+  font-family: ui-monospace, monospace;
+}
+
+.index-reader > code strong {
+  color: var(--lime);
+}
+
+.index-reader > i {
+  font-style: normal;
+}
+
+.index-reader > div {
+  min-width: 145px;
+  min-height: 125px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px dashed #9da9a4;
+  border-radius: 15px;
+  color: var(--muted);
+}
+
+.index-reader > div.found {
+  border-style: solid;
+  border-color: var(--ink);
+  background: var(--lime);
+  box-shadow: 4px 4px 0 var(--ink);
+  color: var(--ink);
+}
+
+.index-reader > div span {
+  font-size: 39px;
+}
+
+.index-reader > div strong {
+  margin-top: 5px;
+  font-size: 11px;
+}
+
+.zero-warning {
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 10px 18px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: #fff0ca;
+}
+
+.zero-warning > strong {
+  grid-row: 1 / 3;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+}
+
+.zero-warning > div {
+  display: flex;
+  gap: 7px;
+}
+
+.zero-warning span {
+  padding: 7px 9px;
+  border-radius: 7px;
+  background: white;
+  font-size: 9px;
+}
+
+.zero-warning b {
+  margin-right: 4px;
+  color: var(--violet);
+}
+
+.zero-warning p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.append-control,
+.edit-list-controls,
+.traverse-code {
+  padding: 30px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+  gap: 13px;
+  border-right: 2px solid var(--ink);
+}
+
+.append-control label,
+.edit-list-controls label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.append-control input,
+.edit-list-controls input {
+  padding: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 9px;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.append-control > code,
+.edit-list-controls > div code,
+.traverse-code > code {
+  padding: 11px;
+  border-radius: 8px;
+  background: var(--navy);
+  color: var(--lime);
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+}
+
+.append-control button,
+.edit-list-controls button,
+.traverse-code button {
+  padding: 11px;
+  background: var(--lime);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.append-control button:disabled,
+.edit-list-controls button:disabled,
+.traverse-code button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.append-control .list-reset,
+.edit-list-controls .list-reset,
+.traverse-code .list-reset {
+  padding: 6px;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.append-result {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #effaff;
+}
+
+.list-train {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+}
+
+.list-train > div {
+  min-width: 75px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: 9px;
+  background: white;
+  text-align: center;
+}
+
+.list-train > div.new {
+  background: var(--yellow);
+  box-shadow: 3px 3px 0 var(--ink);
+  animation: pop-in 180ms ease-out;
+}
+
+.list-train small {
+  display: block;
+  padding: 4px;
+  background: var(--navy);
+  color: white;
+  font-size: 8px;
+}
+
+.list-train strong {
+  display: block;
+  padding: 11px 6px;
+  font-size: 11px;
+}
+
+.list-train > span {
+  padding: 18px 9px;
+  border: 2px dashed #9da9a4;
+  border-radius: 9px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.append-result > code {
+  max-width: 100%;
+  margin-top: 25px;
+  padding: 9px;
+  overflow: hidden;
+  border-radius: 7px;
+  background: white;
+  font-family: ui-monospace, monospace;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.append-result > strong {
+  margin-top: 8px;
+  font-size: 10px;
+}
+
+.editable-slots {
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-content: center;
+  gap: 10px;
+  border-right: 2px solid var(--ink);
+  background: #fff8dd;
+}
+
+.editable-slots button {
+  min-height: 92px;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: white;
+}
+
+.editable-slots button.selected {
+  background: var(--yellow);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.editable-slots small {
+  width: 100%;
+  padding: 6px;
+  border-bottom: 2px solid var(--ink);
+  background: var(--navy);
+  color: white;
+  font-size: 8px;
+}
+
+.editable-slots strong {
+  margin: auto;
+}
+
+.editable-slots > p {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  text-align: center;
+}
+
+.edit-list-controls > div {
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px 10px;
+  border-radius: 9px;
+  background: #effaff;
+}
+
+.edit-list-controls > div span {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.edit-list-controls > div code {
+  grid-row: 1 / 3;
+  grid-column: 2;
+  display: grid;
+  place-items: center;
+}
+
+.edit-list-controls > div strong {
+  font-size: 13px;
+}
+
+.edit-list-controls .remove-item {
+  background: var(--coral);
+}
+
+.traverse-code {
+  background: var(--navy);
+  color: white;
+}
+
+.traverse-code > code.indented {
+  padding-left: 35px;
+}
+
+.item-variable {
+  margin: 10px 0;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid #7892a7;
+  border-radius: 9px;
+  background: #19384f;
+}
+
+.item-variable small {
+  color: #9fb4c2;
+}
+
+.item-variable strong {
+  color: var(--yellow);
+}
+
+.traverse-code .list-reset {
+  color: #b7c8d4;
+}
+
+.traverse-stage {
+  padding: 30px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+  gap: 22px;
+  background: #f4f7f5;
+}
+
+.traverse-items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+
+.traverse-items > div {
+  overflow: hidden;
+  border: 2px solid #aeb8b3;
+  border-radius: 8px;
+  background: white;
+  color: #87938d;
+  text-align: center;
+}
+
+.traverse-items > div.current {
+  border-color: var(--ink);
+  background: var(--yellow);
+  box-shadow: 3px 3px 0 var(--ink);
+  color: var(--ink);
+  transform: translateY(-4px);
+}
+
+.traverse-items > div.done {
+  background: #dff6df;
+  color: #588161;
+}
+
+.traverse-items small {
+  display: block;
+  padding: 4px;
+  background: var(--navy);
+  color: white;
+}
+
+.traverse-items strong {
+  display: block;
+  padding: 11px 4px;
+  font-size: 10px;
+}
+
+.traverse-output {
+  min-height: 130px;
+  padding: 15px;
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  border: 1.5px dashed #9da9a4;
+  border-radius: 9px;
+  background: white;
+}
+
+.traverse-output p {
+  margin: auto;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.traverse-output code {
+  padding: 5px 8px;
+  border-radius: 5px;
+  background: #effaff;
+  font-family: ui-monospace, monospace;
+  font-size: 9px;
+}
+
+.traverse-route {
+  padding: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: white;
+}
+
+.traverse-route span {
+  padding: 7px 9px;
+  border-radius: 7px;
+  background: #f0f3f1;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.traverse-route span.passed {
+  background: var(--lime);
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.lucky-chest-lab {
+  min-height: 480px;
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 0.85fr 1.3fr 0.85fr;
+  align-items: center;
+  gap: 24px;
+  background: var(--navy);
+  color: white;
+}
+
+.prize-list {
+  padding: 18px;
+  display: grid;
+  gap: 6px;
+  border: 1px solid #58758a;
+  border-radius: 10px;
+  background: #17364c;
+}
+
+.prize-list > code {
+  color: var(--lime);
+  font-family: ui-monospace, monospace;
+}
+
+.prize-list > div {
+  padding: 6px 8px;
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  align-items: center;
+  border-radius: 5px;
+  background: #21455e;
+}
+
+.prize-list strong {
+  font-family: ui-monospace, monospace;
+  font-size: 9px;
+}
+
+.lucky-chest {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.chest-lid {
+  width: 185px;
+  height: 62px;
+  border: 5px solid white;
+  border-radius: 80px 80px 8px 8px;
+  background: var(--violet);
+  transform-origin: bottom left;
+  transition: transform 250ms ease;
+}
+
+.lucky-chest.open .chest-lid {
+  transform: rotate(-20deg) translateY(-10px);
+}
+
+.chest-box {
+  display: grid;
+  width: 200px;
+  height: 135px;
+  margin-top: -3px;
+  place-items: center;
+  border: 5px solid white;
+  border-radius: 8px 8px 24px 24px;
+  background: #47346d;
+  box-shadow: 7px 7px 0 var(--yellow);
+}
+
+.chest-box span {
+  font-size: 64px;
+}
+
+.lucky-chest > strong {
+  min-height: 40px;
+  margin: 19px 0 8px;
+  text-align: center;
+}
+
+.lucky-chest button {
+  padding: 11px 15px;
+  background: var(--lime);
+  box-shadow: 3px 3px 0 white;
+}
+
+.draw-history {
+  min-height: 210px;
+  padding: 18px;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  border: 1px solid #58758a;
+  border-radius: 10px;
+  background: #17364c;
+}
+
+.draw-history > strong {
+  margin-bottom: 7px;
+  color: var(--yellow);
+  font-size: 11px;
+}
+
+.draw-history p {
+  color: #91a8b7;
+  font-size: 9px;
+}
+
+.draw-history span {
+  padding: 6px 8px;
+  border-radius: 5px;
+  background: #21455e;
+  font-size: 9px;
+}
+
+.list-project-recipe {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: white;
+}
+
+.list-project-recipe > div {
+  padding: 13px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border-radius: 8px;
+  background: #effaff;
+}
+
+.list-project-recipe span {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--yellow);
+  font-size: 9px;
+}
+
+.list-project-recipe strong {
+  font-size: 10px;
+}
+
+.list-project-recipe i {
+  font-style: normal;
+}
+
 @media (max-width: 850px) {
   .course-shell {
     display: block;
@@ -5787,6 +6612,36 @@ button {
   .return-inputs {
     justify-content: center;
   }
+
+  .backpack-lab,
+  .append-lab,
+  .edit-list-lab,
+  .traverse-lab {
+    grid-template-columns: 1fr;
+  }
+
+  .treasure-shelf,
+  .append-control,
+  .editable-slots,
+  .edit-list-controls,
+  .traverse-code {
+    border-right: 0;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .index-lab {
+    grid-template-columns: 1fr;
+  }
+
+  .lucky-chest-lab {
+    grid-template-columns: 1fr;
+  }
+
+  .prize-list,
+  .draw-history {
+    width: min(100%, 420px);
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 560px) {
@@ -5892,5 +6747,55 @@ button {
 
   .battle-actors > span {
     font-size: 48px;
+  }
+
+  .list-anatomy,
+  .zero-warning,
+  .list-project-recipe {
+    grid-template-columns: 1fr;
+  }
+
+  .zero-warning > strong {
+    grid-row: auto;
+  }
+
+  .zero-warning > div {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .list-project-recipe > i {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+
+  .treasure-shelf,
+  .append-control,
+  .append-result,
+  .editable-slots,
+  .edit-list-controls,
+  .traverse-code,
+  .traverse-stage {
+    padding: 22px 18px;
+  }
+
+  .indexed-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .index-lab {
+    padding: 24px 18px;
+  }
+
+  .traverse-items {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .traverse-route {
+    flex-wrap: wrap;
+  }
+
+  .lucky-chest-lab {
+    padding: 24px 18px;
   }
 }
