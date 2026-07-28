@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 export type SiteLanguage = "zh" | "en";
 export type SiteTheme = "macaron" | "mint" | "classic";
@@ -11,6 +12,7 @@ type SiteSettingsProps = {
   onLanguageChange: (language: SiteLanguage) => void;
   onThemeChange: (theme: SiteTheme) => void;
   cover?: boolean;
+  inline?: boolean;
 };
 
 const themeOptions: Array<{
@@ -41,6 +43,7 @@ export default function SiteSettings({
   onLanguageChange,
   onThemeChange,
   cover = false,
+  inline = false,
 }: SiteSettingsProps) {
   const [open, setOpen] = useState(false);
   const isEnglish = language === "en";
@@ -57,18 +60,23 @@ export default function SiteSettings({
   return (
     <>
       <button
-        className={`site-settings-trigger ${cover ? "on-cover" : ""}`}
+        className={`site-settings-trigger ${cover ? "on-cover" : ""} ${
+          inline ? "is-inline" : ""
+        }`}
         type="button"
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
         aria-expanded={open}
+        aria-label={isEnglish ? "Open settings" : "打开设置"}
+        title={isEnglish ? "Settings" : "设置"}
       >
-        <span aria-hidden="true">⚙</span>
-        {isEnglish ? "Settings" : "设置"}
+        <span aria-hidden="true">⚙︎</span>
       </button>
 
-      {open && (
-        <div className="settings-layer">
+      {open &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div className="settings-layer">
           <button
             className="settings-backdrop"
             type="button"
@@ -165,8 +173,9 @@ export default function SiteSettings({
                 : "这些设置只保存在当前设备。"}
             </footer>
           </section>
-        </div>
-      )}
+          </div>,
+          document.body,
+        )}
     </>
   );
 }

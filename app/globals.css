@@ -329,44 +329,52 @@ button {
 
 .sidebar-footer {
   min-height: 71px;
-  padding: 14px 18px 14px 128px;
+  padding: 5px 10px 5px 20px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 3px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   border-top: 2px solid var(--ink);
   background: var(--navy);
   color: var(--white);
 }
+
+.sidebar-footer > div { min-width: 0; }
 
 .site-settings-trigger {
   position: fixed;
   z-index: 30;
   bottom: 15px;
   left: 16px;
-  min-width: 98px;
-  height: 42px;
-  padding: 0 14px;
+  width: 60px;
+  min-width: 60px;
+  height: 60px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-  border: 2px solid var(--ink);
-  border-radius: 11px;
-  background: var(--yellow);
-  box-shadow: 3px 3px 0 var(--ink);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   cursor: pointer;
-  font-size: 11px;
-  font-weight: 900;
+  color: var(--ink);
 }
 
 .site-settings-trigger:hover {
-  transform: translateY(-2px);
-  box-shadow: 5px 5px 0 var(--ink);
+  transform: rotate(18deg);
+  box-shadow: none;
 }
 
-.site-settings-trigger > span { font-size: 17px; line-height: 1; }
+.site-settings-trigger > span { font-size: 30px; line-height: 1; }
 .site-settings-trigger.on-cover { bottom: 22px; left: 22px; }
+.site-settings-trigger.is-inline {
+  position: static;
+  z-index: auto;
+  flex: 0 0 auto;
+  color: var(--lime);
+}
 
 .settings-layer {
   position: fixed;

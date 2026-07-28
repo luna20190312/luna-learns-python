@@ -876,8 +876,17 @@ export default function CourseShell() {
         </nav>
 
         <footer className="sidebar-footer">
-          <span>{en ? "CURRENT LESSON" : "当前课程"}</span>
-          <strong>{active.lesson.title}</strong>
+          <div>
+            <span>{en ? "CURRENT LESSON" : "当前课程"}</span>
+            <strong>{active.lesson.title}</strong>
+          </div>
+          <SiteSettings
+            language={language}
+            theme={theme}
+            onLanguageChange={setLanguage}
+            onThemeChange={setTheme}
+            inline
+          />
         </footer>
       </aside>
 
@@ -944,12 +953,6 @@ export default function CourseShell() {
           />
         </div>
       </main>
-      <SiteSettings
-        language={language}
-        theme={theme}
-        onLanguageChange={setLanguage}
-        onThemeChange={setTheme}
-      />
     </div>
   );
 }
