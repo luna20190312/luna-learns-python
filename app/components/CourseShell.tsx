@@ -39,6 +39,30 @@ import Lesson06_03 from "../lessons/Lesson06_03";
 import Lesson06_04 from "../lessons/Lesson06_04";
 import Lesson06_05 from "../lessons/Lesson06_05";
 import Lesson06_06 from "../lessons/Lesson06_06";
+import Lesson07_01 from "../lessons/Lesson07_01";
+import Lesson07_02 from "../lessons/Lesson07_02";
+import Lesson07_03 from "../lessons/Lesson07_03";
+import Lesson07_04 from "../lessons/Lesson07_04";
+import Lesson07_05 from "../lessons/Lesson07_05";
+import Lesson07_06 from "../lessons/Lesson07_06";
+import Lesson08_01 from "../lessons/Lesson08_01";
+import Lesson08_02 from "../lessons/Lesson08_02";
+import Lesson08_03 from "../lessons/Lesson08_03";
+import Lesson08_04 from "../lessons/Lesson08_04";
+import Lesson08_05 from "../lessons/Lesson08_05";
+import Lesson08_06 from "../lessons/Lesson08_06";
+import Lesson09_01 from "../lessons/Lesson09_01";
+import Lesson09_02 from "../lessons/Lesson09_02";
+import Lesson09_03 from "../lessons/Lesson09_03";
+import Lesson09_04 from "../lessons/Lesson09_04";
+import Lesson09_05 from "../lessons/Lesson09_05";
+import Lesson09_06 from "../lessons/Lesson09_06";
+import Lesson10_01 from "../lessons/Lesson10_01";
+import Lesson10_02 from "../lessons/Lesson10_02";
+import Lesson10_03 from "../lessons/Lesson10_03";
+import Lesson10_04 from "../lessons/Lesson10_04";
+import Lesson10_05 from "../lessons/Lesson10_05";
+import Lesson10_06 from "../lessons/Lesson10_06";
 
 type LessonEntry = {
   id: string;
@@ -362,6 +386,58 @@ const chapters: ChapterEntry[] = [
         component: Lesson06_06,
         status: "ready",
       },
+    ],
+  },
+  {
+    number: "第 7 章",
+    title: "用代码画出一个世界",
+    description: "坐标、图形与 Turtle 创作",
+    lessons: [
+      { id: "07-01", number: "第 1 课", title: "认识画布和坐标", component: Lesson07_01, status: "ready" },
+      { id: "07-02", number: "第 2 课", title: "画出彩色多边形", component: Lesson07_02, status: "ready" },
+      { id: "07-03", number: "第 3 课", title: "制作旋转花朵", component: Lesson07_03, status: "ready" },
+      { id: "07-04", number: "第 4 课", title: "画笔也能听指令", component: Lesson07_04, status: "ready" },
+      { id: "07-05", number: "第 5 课", title: "随机漫步的小海龟", component: Lesson07_05, status: "ready" },
+      { id: "07-06", number: "第 6 课", title: "设计自己的星空", component: Lesson07_06, status: "ready" },
+    ],
+  },
+  {
+    number: "第 8 章",
+    title: "给数据贴上名字",
+    description: "字典、键和值",
+    lessons: [
+      { id: "08-01", number: "第 1 课", title: "角色资料卡升级", component: Lesson08_01, status: "ready" },
+      { id: "08-02", number: "第 2 课", title: "按名字找到资料", component: Lesson08_02, status: "ready" },
+      { id: "08-03", number: "第 3 课", title: "修改角色的状态", component: Lesson08_03, status: "ready" },
+      { id: "08-04", number: "第 4 课", title: "查看所有资料", component: Lesson08_04, status: "ready" },
+      { id: "08-05", number: "第 5 课", title: "一支冒险小队", component: Lesson08_05, status: "ready" },
+      { id: "08-06", number: "第 6 课", title: "制作怪物图鉴", component: Lesson08_06, status: "ready" },
+    ],
+  },
+  {
+    number: "第 9 章",
+    title: "成为代码侦探",
+    description: "错误信息与调试方法",
+    lessons: [
+      { id: "09-01", number: "第 1 课", title: "错误不是失败", component: Lesson09_01, status: "ready" },
+      { id: "09-02", number: "第 2 课", title: "消失的标点符号", component: Lesson09_02, status: "ready" },
+      { id: "09-03", number: "第 3 课", title: "变量为什么不认识我", component: Lesson09_03, status: "ready" },
+      { id: "09-04", number: "第 4 课", title: "程序为什么停不下来", component: Lesson09_04, status: "ready" },
+      { id: "09-05", number: "第 5 课", title: "用 print() 寻找线索", component: Lesson09_05, status: "ready" },
+      { id: "09-06", number: "第 6 课", title: "修复坏掉的小游戏", component: Lesson09_06, status: "ready" },
+    ],
+  },
+  {
+    number: "第 10 章",
+    title: "Python 小小创作家",
+    description: "把语法组合成完整作品",
+    lessons: [
+      { id: "10-01", number: "第 1 课", title: "石头剪刀布", component: Lesson10_01, status: "ready" },
+      { id: "10-02", number: "第 2 课", title: "数字猜猜看", component: Lesson10_02, status: "ready" },
+      { id: "10-03", number: "第 3 课", title: "文字冒险游戏", component: Lesson10_03, status: "ready" },
+      { id: "10-04", number: "第 4 课", title: "宠物养成日记", component: Lesson10_04, status: "ready" },
+      { id: "10-05", number: "第 5 课", title: "随机故事生成器", component: Lesson10_05, status: "ready" },
+      { id: "10-06", number: "第 6 课", title: "我的第一个独立作品", component: Lesson10_06, status: "ready" },
     ],
   },
 ];

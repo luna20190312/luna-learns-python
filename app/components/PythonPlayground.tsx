@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 
 declare global {
   interface Window {
@@ -56,6 +56,7 @@ type PythonPlaygroundProps = {
   title?: string;
   prompt?: string;
   compact?: boolean;
+  turtle?: boolean;
   inputDefaults?: Array<{
     label: string;
     value: string;
@@ -67,8 +68,10 @@ export default function PythonPlayground({
   title = "动手试试看",
   prompt = "先运行，再改一个地方。",
   compact = false,
+  turtle = false,
   inputDefaults = [],
 }: PythonPlaygroundProps) {
+  const turtleTargetId = `turtle-${useId().replaceAll(":", "")}`;
   const [code, setCode] = useState(initialCode);
   const [ready, setReady] = useState(false);
   const [running, setRunning] = useState(false);
@@ -97,6 +100,9 @@ export default function PythonPlayground({
     setRunning(true);
     setOutput("");
     setError("");
+    if (turtle) {
+      document.getElementById(turtleTargetId)?.replaceChildren();
+    }
     let nextOutput = "";
     let inputIndex = 0;
 
@@ -124,6 +130,13 @@ export default function PythonPlayground({
         inputfunTakesPrompt: true,
         __future__: Sk.python3,
       });
+      if (turtle) {
+        Sk.TurtleGraphics = {
+          target: turtleTargetId,
+          width: 520,
+          height: 330,
+        };
+      }
       await Sk.misceval.asyncToPromise(() =>
         Sk.importMainWithBody("<stdin>", false, code, true),
       );
@@ -188,13 +201,20 @@ export default function PythonPlayground({
         </div>
         <div className="mini-result">
           <div className="mini-panel-label">计算机给出的结果</div>
-          {!output && !error && (
+          {!turtle && !output && !error && (
             <div className="result-waiting">
               <span>?</span>
               <p>点击运行后，这里才会出现答案</p>
             </div>
           )}
-          {output && <pre>{output}</pre>}
+          {!turtle && output && <pre>{output}</pre>}
+          {turtle && (
+            <div
+              id={turtleTargetId}
+              className="mini-turtle-output"
+              aria-label="Python Turtle 绘图结果"
+            />
+          )}
           {error && (
             <div className="mini-error">
               <strong>代码卡住了</strong>

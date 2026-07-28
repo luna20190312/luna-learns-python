@@ -201,8 +201,9 @@ export default function CourseCover({
             <strong>Python 3.7-ish</strong> 兼容。
           </p>
           <p>
-            它适合当前课程中的输出、输入、变量、条件、循环、随机数和 Turtle
-            绘图，但不是完整的桌面 Python 环境，也不能任意安装第三方软件包。
+            它适合当前课程中的输出、输入、变量、条件、循环、函数、字符串、
+            列表、字典、随机数和 Turtle 绘图，但不是完整的桌面 Python
+            环境，也不能任意安装第三方软件包。
           </p>
           <small>
             Web stack: Next.js 16.2.6 · React 19.2.6 · TypeScript 5.9.3
