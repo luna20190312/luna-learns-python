@@ -877,7 +877,7 @@ export default function CourseShell() {
 
         <footer className="sidebar-footer">
           <div>
-            <span>{en ? "CURRENT LESSON" : "当前课程"}</span>
+            <span>当前课程</span>
             <strong>{active.lesson.title}</strong>
           </div>
           <SiteSettings
