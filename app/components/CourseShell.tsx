@@ -33,6 +33,12 @@ import Lesson05_03 from "../lessons/Lesson05_03";
 import Lesson05_04 from "../lessons/Lesson05_04";
 import Lesson05_05 from "../lessons/Lesson05_05";
 import Lesson05_06 from "../lessons/Lesson05_06";
+import Lesson06_01 from "../lessons/Lesson06_01";
+import Lesson06_02 from "../lessons/Lesson06_02";
+import Lesson06_03 from "../lessons/Lesson06_03";
+import Lesson06_04 from "../lessons/Lesson06_04";
+import Lesson06_05 from "../lessons/Lesson06_05";
+import Lesson06_06 from "../lessons/Lesson06_06";
 
 type LessonEntry = {
   id: string;
@@ -305,6 +311,55 @@ const chapters: ChapterEntry[] = [
         number: "第 6 课",
         title: "随机抽取幸运宝物",
         component: Lesson05_06,
+        status: "ready",
+      },
+    ],
+  },
+  {
+    number: "第 6 章",
+    title: "文字的秘密",
+    description: "长度、字符与文字处理",
+    lessons: [
+      {
+        id: "06-01",
+        number: "第 1 课",
+        title: "文字也有长度",
+        component: Lesson06_01,
+        status: "ready",
+      },
+      {
+        id: "06-02",
+        number: "第 2 课",
+        title: "找到文字中的字符",
+        component: Lesson06_02,
+        status: "ready",
+      },
+      {
+        id: "06-03",
+        number: "第 3 课",
+        title: "大写、小写变变变",
+        component: Lesson06_03,
+        status: "ready",
+      },
+      {
+        id: "06-04",
+        number: "第 4 课",
+        title: "拆开一句话",
+        component: Lesson06_04,
+        status: "ready",
+      },
+      {
+        id: "06-05",
+        number: "第 5 课",
+        title: "检查秘密关键词",
+        component: Lesson06_05,
+        status: "ready",
+      },
+      {
+        id: "06-06",
+        number: "第 6 课",
+        title: "制作密码检查员",
+        component: Lesson06_06,
         status: "ready",
       },
     ],

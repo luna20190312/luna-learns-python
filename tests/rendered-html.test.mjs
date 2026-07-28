@@ -43,6 +43,7 @@ test("server-renders the Luna Learns Python course home", async () => {
   assert.match(html, /让程序重复工作/);
   assert.match(html, /把代码变成自己的指令/);
   assert.match(html, /一次记住很多东西/);
+  assert.match(html, /文字的秘密/);
   assert.doesNotMatch(html, /class="course-shell"/);
   assert.doesNotMatch(html, /aria-label="课程目录"/);
 });
@@ -61,7 +62,7 @@ test("registers every lesson and bundles the browser Python runtime", async () =
   ]);
 
   const lessonFiles = files.filter((file) => /^Lesson\d{2}_\d{2}\.tsx$/.test(file));
-  assert.equal(lessonFiles.length, 31);
+  assert.equal(lessonFiles.length, 37);
 
   for (const file of lessonFiles) {
     const component = file.replace(".tsx", "");
@@ -69,7 +70,7 @@ test("registers every lesson and bundles the browser Python runtime", async () =
     assert.match(courseShell, new RegExp(`component: ${component}`));
   }
 
-  assert.equal((courseShell.match(/status: "ready",/g) ?? []).length, 31);
+  assert.equal((courseShell.match(/status: "ready",/g) ?? []).length, 37);
   assert.match(courseShell, /luna-learns-python:last-lesson/);
   assert.match(courseShell, /window\.localStorage\.setItem/);
   assert.match(courseShell, /aria-label="返回课程封面"/);
