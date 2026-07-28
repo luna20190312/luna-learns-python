@@ -21,6 +21,12 @@ import Lesson03_03 from "../lessons/Lesson03_03";
 import Lesson03_04 from "../lessons/Lesson03_04";
 import Lesson03_05 from "../lessons/Lesson03_05";
 import Lesson03_06 from "../lessons/Lesson03_06";
+import Lesson04_01 from "../lessons/Lesson04_01";
+import Lesson04_02 from "../lessons/Lesson04_02";
+import Lesson04_03 from "../lessons/Lesson04_03";
+import Lesson04_04 from "../lessons/Lesson04_04";
+import Lesson04_05 from "../lessons/Lesson04_05";
+import Lesson04_06 from "../lessons/Lesson04_06";
 
 type LessonEntry = {
   id: string;
@@ -195,6 +201,55 @@ const chapters: ChapterEntry[] = [
         number: "第 6 课",
         title: "猜数字小游戏",
         component: Lesson03_06,
+        status: "ready",
+      },
+    ],
+  },
+  {
+    number: "第 4 章",
+    title: "把代码变成自己的指令",
+    description: "函数、参数与返回值",
+    lessons: [
+      {
+        id: "04-01",
+        number: "第 1 课",
+        title: "给一段代码起名字",
+        component: Lesson04_01,
+        status: "ready",
+      },
+      {
+        id: "04-02",
+        number: "第 2 课",
+        title: "呼叫自己的指令",
+        component: Lesson04_02,
+        status: "ready",
+      },
+      {
+        id: "04-03",
+        number: "第 3 课",
+        title: "给函数送一份礼物",
+        component: Lesson04_03,
+        status: "ready",
+      },
+      {
+        id: "04-04",
+        number: "第 4 课",
+        title: "函数把答案带回来",
+        component: Lesson04_04,
+        status: "ready",
+      },
+      {
+        id: "04-05",
+        number: "第 5 课",
+        title: "制作角色技能",
+        component: Lesson04_05,
+        status: "ready",
+      },
+      {
+        id: "04-06",
+        number: "第 6 课",
+        title: "建造小小工具箱",
+        component: Lesson04_06,
         status: "ready",
       },
     ],
